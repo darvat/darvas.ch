@@ -103,6 +103,7 @@ h1 {
 
 .contact-info {
     margin-bottom: 30px;
+    opacity: 1 !important; /* Ensure visibility regardless of animation */
 }
 
 .contact-info div {

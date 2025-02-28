@@ -53,6 +53,12 @@ const App = (function () {
                 y: 30
             });
 
+            // Ensure contact info is properly initialized
+            gsap.set('.sidebar .contact-info', {
+                opacity: 0,
+                y: 30
+            });
+
             // Create a master timeline for coordinating all animations
             const masterTimeline = gsap.timeline();
 
@@ -75,21 +81,28 @@ const App = (function () {
                     y: -10,
                     duration: 0.7,
                     ease: 'power2.out'
-                }, '-=0.4');
+                }, '-=0.4')
+                // Add immediate animation for contact info to ensure it's visible
+                .to('.sidebar .contact-info', {
+                    opacity: 1,
+                    y: 0,
+                    duration: 0.5,
+                    ease: 'power2.out'
+                }, '-=0.3');
 
             // Create sidebar timeline
             const sidebarTimeline = gsap.timeline();
 
-            // Animate sidebar elements with staggered effect
+            // Animate sidebar elements
             const sidebarElements = [
-                '.contact-info',
-                '.sidebar h2:nth-of-type(1)',
-                '.sidebar .skill-list:nth-of-type(1)',
-                '.sidebar h2:nth-of-type(2)',
-                '.sidebar .skill-list:nth-of-type(2)',
-                '.sidebar h2:nth-of-type(3)',
-                '.sidebar .skill-list:nth-of-type(3)',
-                '.sidebar h2:nth-of-type(4)',
+                '.sidebar .contact-info',
+                '.sidebar h2#key-skills-title',
+                '.sidebar section:nth-of-type(1) .skill-list',
+                '.sidebar h2#tech-skills-title',
+                '.sidebar section:nth-of-type(2) .skill-list',
+                '.sidebar h2#certifications-title',
+                '.sidebar section:nth-of-type(3) .skill-list',
+                '.sidebar h2#hobbies-title',
                 '.sidebar p'
             ];
 
@@ -514,7 +527,10 @@ const App = (function () {
 
                 // Remove modal after animation completes
                 setTimeout(() => {
-                    DOM.body.removeChild(modal);
+                    // Check if modal is still in the DOM before removing
+                    if (modal && modal.parentNode === DOM.body) {
+                        DOM.body.removeChild(modal);
+                    }
 
                     // Restore focus to the element that had focus before the modal was opened
                     if (previouslyFocusedElement) {
