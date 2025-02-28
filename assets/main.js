@@ -161,6 +161,40 @@ const App = (function () {
                         ease: 'power1.out'
                     }, `-=${0.2 + index * 0.15}`);
                 }
+
+                // Add special animation for job cards in the experience section
+                const jobCards = section.querySelectorAll('.job-card');
+                if (jobCards.length) {
+                    jobCards.forEach((card, cardIndex) => {
+                        // Animate the job card
+                        mainContentTimeline.from(card, {
+                            opacity: 0,
+                            x: -30,
+                            duration: 0.6,
+                            ease: 'power2.out',
+                            delay: 0.1 * cardIndex
+                        }, `-=${0.3 + index * 0.1}`);
+
+                        // Animate the job icon
+                        mainContentTimeline.from(card.querySelector('.job-icon i'), {
+                            scale: 0,
+                            duration: 0.4,
+                            ease: 'back.out(1.7)',
+                            delay: 0.1 * cardIndex
+                        }, `-=${0.5 + index * 0.1}`);
+
+                        // Animate the timeline line with a drawing effect
+                        const timelineLine = card.querySelector('.timeline-line');
+                        if (timelineLine) {
+                            mainContentTimeline.from(timelineLine, {
+                                height: 0,
+                                duration: 0.5,
+                                ease: 'power1.inOut',
+                                delay: 0.1 * cardIndex
+                            }, `-=${0.3 + index * 0.1}`);
+                        }
+                    });
+                }
             });
 
             // Add special animation for skill list items
