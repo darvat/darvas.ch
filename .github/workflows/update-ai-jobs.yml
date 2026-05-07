@@ -3,8 +3,8 @@ name: Update AI jobs page
 on:
   workflow_dispatch:
   schedule:
-    # Daily at 06:17 Zurich winter time / 07:17 Zurich summer time.
-    - cron: '17 5 * * *'
+    # Daily at 20:20 Zurich summer time / 19:20 Zurich winter time.
+    - cron: '20 18 * * *'
 
 permissions:
   contents: write
