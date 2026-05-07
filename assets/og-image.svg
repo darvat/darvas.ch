@@ -1,0 +1,29 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630" role="img" aria-label="Tamas Darvas - AI Engineer Zürich">
+    <defs>
+        <linearGradient id="bg" x1="0" x2="1" y1="0" y2="1">
+            <stop offset="0" stop-color="#101820"/>
+            <stop offset="0.68" stop-color="#172331"/>
+            <stop offset="1" stop-color="#243017"/>
+        </linearGradient>
+        <radialGradient id="sphere" cx="35%" cy="25%" r="70%">
+            <stop offset="0" stop-color="#ffffff" stop-opacity="0.9"/>
+            <stop offset="0.16" stop-color="#3f83ce"/>
+            <stop offset="0.68" stop-color="#2364aa"/>
+            <stop offset="1" stop-color="#0f3765"/>
+        </radialGradient>
+    </defs>
+    <rect width="1200" height="630" fill="url(#bg)"/>
+    <g opacity="0.18" stroke="#ffffff" stroke-width="1">
+        <path d="M650 80v500M740 80v500M830 80v500M920 80v500M1010 80v500"/>
+        <path d="M570 130h560M570 220h560M570 310h560M570 400h560M570 490h560"/>
+    </g>
+    <circle cx="920" cy="250" r="120" fill="url(#sphere)" opacity="0.92"/>
+    <circle cx="882" cy="208" r="13" fill="#fff" opacity="0.86"/>
+    <circle cx="1024" cy="392" r="76" fill="#d9643a" opacity="0.9"/>
+    <circle cx="780" cy="420" r="76" fill="#276d62" opacity="0.9"/>
+    <text x="72" y="120" fill="#d9643a" font-family="Inter, Arial, sans-serif" font-size="28" font-weight="800" letter-spacing="7">AI ENGINEER ZÜRICH</text>
+    <text x="72" y="260" fill="#ffffff" font-family="Inter, Arial, sans-serif" font-size="104" font-weight="900">Tamas</text>
+    <text x="72" y="372" fill="#ffffff" font-family="Inter, Arial, sans-serif" font-size="104" font-weight="900">Darvas</text>
+    <text x="76" y="455" fill="#ffffff" font-family="Inter, Arial, sans-serif" font-size="40" font-weight="800">AI Engineering Lead</text>
+    <text x="76" y="520" fill="#cbd3dc" font-family="Inter, Arial, sans-serif" font-size="30">30+ years IT • hands-on AI platforms • people leadership</text>
+</svg>
