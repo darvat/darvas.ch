@@ -1,0 +1,36 @@
+name: Update AI jobs page
+
+on:
+  workflow_dispatch:
+  schedule:
+    # Daily at 06:17 Zurich winter time / 07:17 Zurich summer time.
+    - cron: '17 5 * * *'
+
+permissions:
+  contents: write
+
+jobs:
+  update-ai-jobs:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: '24'
+
+      - name: Run tests
+        run: npm test
+
+      - name: Generate AI jobs page
+        env:
+          SERPER_DEV_API: ${{ secrets.SERPER_DEV_API }}
+        run: npm run scrape:ai-jobs -- --max-results-per-query 10 --delay-ms 100
+
+      - name: Commit updated job data
+        uses: stefanzweifel/git-auto-commit-action@v5
+        with:
+          commit_message: 'chore: update AI jobs page'
+          file_pattern: 'ai-engineer-zurich-jobs/index.html data/ai-engineer-zurich-jobs.json data/ai-engineer-zurich-jobs-table.html'

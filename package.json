@@ -1,0 +1,11 @@
+{
+  "name": "darvas-ch",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "build": "node scripts/build-static.mjs",
+    "scrape:ai-jobs": "node scripts/scrape-ai-jobs.mjs",
+    "test": "node --test test/*.test.mjs"
+  }
+}
