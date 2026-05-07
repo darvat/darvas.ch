@@ -956,6 +956,91 @@ main > section {
     }
 }
 
+.jobs-page {
+    padding-top: calc(var(--header-height) + 56px);
+}
+
+.jobs-section {
+    width: min(var(--max-width), calc(100% - 48px));
+    margin: 0 auto 80px;
+}
+
+.jobs-section h1 {
+    max-width: 860px;
+    margin: 0;
+    font-size: clamp(3rem, 7vw, 6.4rem);
+    line-height: 0.92;
+    letter-spacing: -0.05em;
+}
+
+.section-lede,
+.jobs-meta {
+    max-width: 820px;
+    color: var(--ink-soft);
+    font-size: 1.05rem;
+}
+
+.jobs-meta {
+    color: var(--muted);
+    font-weight: 700;
+}
+
+.jobs-table {
+    width: 100%;
+    margin-top: 28px;
+    border-collapse: collapse;
+    overflow: hidden;
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    background: var(--surface);
+    box-shadow: 0 18px 50px rgba(15, 22, 30, 0.08);
+}
+
+.jobs-table caption {
+    caption-side: bottom;
+    padding: 14px 0 0;
+    color: var(--muted);
+    font-size: 0.85rem;
+    text-align: left;
+}
+
+.jobs-table th,
+.jobs-table td {
+    padding: 16px 18px;
+    border-bottom: 1px solid var(--line);
+    text-align: left;
+    vertical-align: top;
+}
+
+.jobs-table th {
+    background: var(--night);
+    color: #fff;
+    font-size: 0.78rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+}
+
+.jobs-table td:first-child {
+    width: 28%;
+    font-weight: 800;
+}
+
+.jobs-table td:nth-child(2) {
+    color: var(--ink-soft);
+}
+
+.jobs-table td:last-child {
+    width: 18%;
+    color: var(--muted);
+    font-weight: 700;
+}
+
+.jobs-table a {
+    color: var(--blue);
+    text-decoration-thickness: 0.08em;
+    text-underline-offset: 0.18em;
+}
+
 @media (max-width: 900px) {
     .nav-toggle {
         display: inline-flex;
@@ -1095,9 +1180,26 @@ main > section {
         line-height: 1.28;
     }
 
+    .jobs-section,
     .section:not(.contact-section),
     .experience-section {
         width: calc(100% - 36px);
+    }
+
+    .jobs-table {
+        display: block;
+        overflow-x: auto;
+        white-space: normal;
+    }
+
+    .jobs-table th,
+    .jobs-table td {
+        min-width: 180px;
+        padding: 14px;
+    }
+
+    .jobs-table td:nth-child(2) {
+        min-width: 320px;
     }
 
     .section-grid {
