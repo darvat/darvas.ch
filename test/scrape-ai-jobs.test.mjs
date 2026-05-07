@@ -7,6 +7,7 @@ import {
   isRelevantJobResult,
   mergeResults,
   renderHtmlTable,
+  renderPage,
   buildQueries,
 } from '../scripts/scrape-ai-jobs.mjs';
 
@@ -66,4 +67,22 @@ test('renderHtmlTable escapes untrusted result fields', () => {
 test('buildQueries creates generic role/location searches, not company-specific searches', () => {
   const queries = buildQueries({ roles: ['AI Engineer'], locations: ['Zurich'], suffixes: ['jobs'] });
   assert.deepEqual(queries, ['AI Engineer Zurich jobs']);
+});
+
+test('renderPage includes SEO metadata and safe structured data', () => {
+  const html = renderPage([{
+    title: 'AI Engineer Zürich <script>alert(1)</script>',
+    link: 'https://example.com/job',
+    snippet: 'Build LLM and RAG systems around Zurich.',
+    source: 'example.com',
+    queries: ['AI Engineer Zurich jobs'],
+  }], { generatedAt: '2026-05-07T17:18:02.455Z' });
+
+  assert.match(html, /<link rel="canonical" href="https:\/\/darvas\.ch\/ai-engineer-zurich-jobs\/">/);
+  assert.match(html, /<meta property="og:title" content="AI Engineer Zürich Jobs/);
+  assert.match(html, /<script type="application\/ld\+json">/);
+  assert.match(html, /"@type": "FAQPage"/);
+  assert.match(html, /"@type": "ItemList"/);
+  assert.doesNotMatch(html, /<script>alert\(1\)<\/script>/);
+  assert.match(html, /AI Engineer Zürich &lt;script&gt;alert\(1\)&lt;\/script&gt;/);
 });

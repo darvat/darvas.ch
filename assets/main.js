@@ -52,7 +52,15 @@ const App = (() => {
         });
 
         const sections = Array.from(state.navLinks)
-            .map((link) => document.querySelector(link.getAttribute("href")))
+            .map((link) => {
+                const href = link.getAttribute("href");
+
+                if (!href || !href.startsWith("#") || href.length === 1) {
+                    return null;
+                }
+
+                return document.getElementById(href.slice(1));
+            })
             .filter(Boolean);
 
         const observer = new IntersectionObserver((entries) => {

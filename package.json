@@ -4,7 +4,9 @@
   "private": true,
   "type": "module",
   "scripts": {
+    "dev": "npx wrangler pages dev dist",
     "build": "node scripts/build-static.mjs",
+    "preview": "npm run build && npx wrangler pages dev dist",
     "scrape:ai-jobs": "node scripts/scrape-ai-jobs.mjs",
     "test": "node --test test/*.test.mjs"
   }
