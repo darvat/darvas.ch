@@ -128,6 +128,12 @@ button {
     gap: clamp(12px, 2vw, 28px);
 }
 
+.nav-item {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+}
+
 .site-nav a {
     position: relative;
     color: rgba(255, 255, 255, 0.78);
@@ -162,6 +168,61 @@ button {
 .site-nav a:focus-visible::after,
 .site-nav a.active::after {
     transform: scaleX(1);
+}
+
+.nav-submenu {
+    position: absolute;
+    top: calc(100% + 14px);
+    left: 0;
+    display: grid;
+    gap: 2px;
+    width: min(288px, calc(100vw - 32px));
+    padding: 10px;
+    border: 1px solid rgba(255, 255, 255, 0.14);
+    border-radius: var(--radius);
+    background: rgba(16, 24, 32, 0.96);
+    box-shadow: 0 22px 54px rgba(0, 0, 0, 0.26);
+    opacity: 0;
+    pointer-events: none;
+    transform: translateY(-6px);
+    transition: opacity 160ms ease, transform 160ms ease;
+}
+
+.nav-submenu::before {
+    content: "";
+    position: absolute;
+    right: 0;
+    bottom: 100%;
+    left: 0;
+    height: 14px;
+}
+
+.nav-item:hover .nav-submenu,
+.nav-item:focus-within .nav-submenu {
+    opacity: 1;
+    pointer-events: auto;
+    transform: translateY(0);
+}
+
+.nav-submenu a {
+    display: block;
+    padding: 10px 11px;
+    border-radius: 6px;
+    color: rgba(255, 255, 255, 0.74);
+    font-size: 0.82rem;
+    line-height: 1.25;
+    letter-spacing: 0;
+    text-transform: none;
+}
+
+.nav-submenu a::after {
+    display: none;
+}
+
+.nav-submenu a:hover,
+.nav-submenu a:focus-visible {
+    color: #fff;
+    background: rgba(255, 255, 255, 0.08);
 }
 
 .nav-toggle {
@@ -1740,6 +1801,37 @@ main>section {
 
     .site-nav a::after {
         display: none;
+    }
+
+    .nav-item {
+        display: grid;
+        align-items: stretch;
+    }
+
+    .nav-submenu {
+        position: static;
+        width: auto;
+        margin: -6px 0 10px 12px;
+        padding: 0 0 0 14px;
+        border: 0;
+        border-left: 1px solid rgba(255, 255, 255, 0.16);
+        border-radius: 0;
+        background: transparent;
+        box-shadow: none;
+        opacity: 1;
+        pointer-events: auto;
+        transform: none;
+    }
+
+    .nav-submenu::before {
+        display: none;
+    }
+
+    .nav-submenu a {
+        padding: 8px 0;
+        border-bottom: 0;
+        color: rgba(255, 255, 255, 0.66);
+        font-size: 0.82rem;
     }
 
     .hero {

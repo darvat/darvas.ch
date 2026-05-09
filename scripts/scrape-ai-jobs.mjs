@@ -444,8 +444,25 @@ ${structuredData}
     <nav class="site-nav" id="site-navigation" aria-label="Primary navigation">
       <a href="/#profile">Profile</a>
       <a href="/#experience">Experience</a>
-      <a href="/field-notes/">Field Notes</a>
-      <a href="/leadership/">Leadership</a>
+      <div class="nav-item has-submenu">
+        <a href="/field-notes/" aria-haspopup="true">Field Notes</a>
+        <div class="nav-submenu" aria-label="Field Notes submenu">
+          <a href="/field-notes/">Overview</a>
+          <a href="/field-notes/production-rag/">Production RAG</a>
+          <a href="/field-notes/agentic-ai-enterprise/">Agentic AI</a>
+          <a href="/field-notes/llm-evaluation/">LLM Evaluation</a>
+          <a href="/field-notes/ai-platform-architecture/">AI Platform Architecture</a>
+        </div>
+      </div>
+      <div class="nav-item has-submenu">
+        <a href="/leadership/" aria-haspopup="true">Leadership</a>
+        <div class="nav-submenu" aria-label="Leadership submenu">
+          <a href="/leadership/">How I Lead Teams</a>
+          <a href="/leadership/#leadership-thesis">Leadership Thesis</a>
+          <a href="/leadership/#leverage-title">How I Create Leverage</a>
+          <a href="/leadership/#not-optimise-title">What I Do Not Optimise For</a>
+        </div>
+      </div>
       <a href="${MARKET_PATH}">Zurich AI Market</a>
       <a href="/#contact">Contact</a>
     </nav>
