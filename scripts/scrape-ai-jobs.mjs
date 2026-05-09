@@ -1,6 +1,7 @@
 import fs from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
+import { renderSiteHeader } from './site-chrome.mjs';
 
 const DEFAULT_ROLES = [
   'AI Engineer',
@@ -434,39 +435,7 @@ ${structuredData}
 </head>
 <body>
   <a class="skip-link" href="#jobs">Skip to jobs</a>
-  <header class="site-header">
-    <a class="brand-mark" href="/" aria-label="Tamas Darvas home"><span>TD</span></a>
-    <button class="nav-toggle" type="button" aria-label="Open navigation" aria-expanded="false" aria-controls="site-navigation">
-      <span></span>
-      <span></span>
-      <span></span>
-    </button>
-    <nav class="site-nav" id="site-navigation" aria-label="Primary navigation">
-      <a href="/#profile">Profile</a>
-      <a href="/#experience">Experience</a>
-      <div class="nav-item has-submenu">
-        <a href="/field-notes/" aria-haspopup="true">Field Notes</a>
-        <div class="nav-submenu" aria-label="Field Notes submenu">
-          <a href="/field-notes/">Overview</a>
-          <a href="/field-notes/production-rag/">Production RAG</a>
-          <a href="/field-notes/agentic-ai-enterprise/">Agentic AI</a>
-          <a href="/field-notes/llm-evaluation/">LLM Evaluation</a>
-          <a href="/field-notes/ai-platform-architecture/">AI Platform Architecture</a>
-        </div>
-      </div>
-      <div class="nav-item has-submenu">
-        <a href="/leadership/" aria-haspopup="true">Leadership</a>
-        <div class="nav-submenu" aria-label="Leadership submenu">
-          <a href="/leadership/">How I Lead Teams</a>
-          <a href="/leadership/#leadership-thesis">Leadership Thesis</a>
-          <a href="/leadership/#leverage-title">How I Create Leverage</a>
-          <a href="/leadership/#not-optimise-title">What I Do Not Optimise For</a>
-        </div>
-      </div>
-      <a href="${MARKET_PATH}">Zurich AI Market</a>
-      <a href="/#contact">Contact</a>
-    </nav>
-  </header>
+${renderSiteHeader({ indent: '  ' })}
   <main id="jobs" class="jobs-page">
     <nav class="breadcrumbs" aria-label="Breadcrumb">
       <ol>

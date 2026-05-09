@@ -14,8 +14,9 @@ The site includes a generated `/ai-engineer-zurich-jobs/` page with a static HTM
 ├── assets/                            # Public CSS, JS, favicons, OG images
 ├── data/                              # Generated job data/table cache, not deployed
 ├── scripts/
+│   ├── site-chrome.mjs                # Shared header/navigation renderer
 │   ├── scrape-ai-jobs.mjs             # Serper-based generic job scraper
-│   └── build-static.mjs               # Copies deployable static files to dist/
+│   └── build-static.mjs               # Builds deployable static files in dist/
 ├── test/                              # Node test suite
 ├── wrangler.jsonc                     # Cloudflare/Wrangler config
 ├── .assetsignore                      # Excludes non-public files from Worker assets
@@ -60,11 +61,18 @@ Build static deploy artifacts:
 npm run build
 ```
 
-This creates `dist/` containing only public static files:
+This creates `dist/` containing only public static files. During the build,
+hand-authored HTML pages expand `<!-- site-header: {...} -->` markers through
+`scripts/site-chrome.mjs`, so shared header and navigation changes are made in
+one place.
 
 ```text
 dist/index.html
 dist/ai-engineer-zurich-jobs/index.html
+dist/field-notes/*
+dist/leadership/index.html
+dist/zurich-ai-market/index.html
+dist/de/ki-engineer-zuerich/index.html
 dist/assets/*
 dist/robots.txt
 dist/sitemap.xml
@@ -91,6 +99,8 @@ zurich-ai-market/index.html               # market page with refreshed snapshot 
 data/ai-engineer-zurich-jobs.json         # generated data cache
 data/ai-engineer-zurich-jobs-table.html   # reusable generated HTML table
 ```
+
+The generated jobs page also uses the shared header/navigation renderer.
 
 Useful scraper options:
 
@@ -125,6 +135,10 @@ Deployed:
 
 - `dist/index.html`
 - `dist/ai-engineer-zurich-jobs/index.html`
+- `dist/field-notes/*`
+- `dist/leadership/index.html`
+- `dist/zurich-ai-market/index.html`
+- `dist/de/ki-engineer-zuerich/index.html`
 - `dist/assets/*`
 - `dist/robots.txt`
 - `dist/sitemap.xml`
@@ -190,4 +204,4 @@ Then check:
 find dist -maxdepth 3 -type f | sort
 ```
 
-Expected public files only: homepage, jobs page, assets, robots.txt, and sitemap.xml.
+Expected public files only: site HTML pages, assets, robots.txt, and sitemap.xml.

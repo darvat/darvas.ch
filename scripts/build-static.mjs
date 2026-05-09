@@ -1,5 +1,6 @@
 import fs from 'node:fs/promises';
 import path from 'node:path';
+import { renderSiteHeader } from './site-chrome.mjs';
 
 const dist = 'dist';
 const files = [
@@ -14,6 +15,46 @@ const files = [
   'de',
 ];
 
+const SITE_HEADER_MARKER = /^([ \t]*)<!--\s*site-header:\s*(\{.*\})\s*-->\s*$/gm;
+
+function renderHeaderMarker(rawConfig, { indent, sourcePath }) {
+  try {
+    const config = JSON.parse(rawConfig);
+    return renderSiteHeader({ ...config, indent });
+  } catch (error) {
+    throw new Error(`Invalid site-header marker in ${sourcePath}: ${error.message}`);
+  }
+}
+
+function transformHtml(html, sourcePath) {
+  return html.replace(SITE_HEADER_MARKER, (_match, indent, rawConfig) => {
+    return renderHeaderMarker(rawConfig, { indent, sourcePath });
+  });
+}
+
+async function copyEntry(source, target) {
+  const stats = await fs.stat(source);
+
+  if (stats.isDirectory()) {
+    await fs.mkdir(target, { recursive: true });
+    const entries = await fs.readdir(source, { withFileTypes: true });
+    await Promise.all(entries.map((entry) => {
+      return copyEntry(path.join(source, entry.name), path.join(target, entry.name));
+    }));
+    return;
+  }
+
+  await fs.mkdir(path.dirname(target), { recursive: true });
+
+  if (source.endsWith('.html')) {
+    const html = await fs.readFile(source, 'utf8');
+    await fs.writeFile(target, transformHtml(html, source));
+    return;
+  }
+
+  await fs.copyFile(source, target);
+}
+
 async function build() {
   await fs.rm(dist, { recursive: true, force: true });
   await fs.mkdir(dist, { recursive: true });
@@ -26,7 +67,7 @@ async function build() {
         return;
       }
       const target = path.join(dist, file);
-      await fs.cp(file, target, { recursive: true });
+      await copyEntry(file, target);
     })
   );
 
