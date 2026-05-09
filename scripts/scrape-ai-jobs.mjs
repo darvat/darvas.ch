@@ -113,9 +113,9 @@ export function mergeResults(queryResults) {
         continue;
       }
       byUrl.set(normalizedUrl, {
-        title: cleanTitle(item.title),
+        title: cleanText(item.title),
         link: normalizedUrl,
-        snippet: cleanSnippet(item.snippet ?? ''),
+        snippet: cleanText(item.snippet ?? ''),
         source: sourceFromUrl(normalizedUrl),
         queries: [query],
       });
@@ -135,12 +135,8 @@ function scoreResult(result) {
   return score;
 }
 
-function cleanTitle(title) {
-  return String(title ?? '').replace(/\s+/g, ' ').trim();
-}
-
-function cleanSnippet(snippet) {
-  return String(snippet ?? '').replace(/\s+/g, ' ').trim();
+function cleanText(text) {
+  return String(text ?? '').replace(/\s+/g, ' ').trim();
 }
 
 function escapeHtml(value) {
