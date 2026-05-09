@@ -163,13 +163,6 @@ const App = (() => {
                 showModal(label, value, button);
             });
         });
-
-        document.addEventListener("click", (event) => {
-            const modal = document.querySelector(".contact-modal");
-            if (modal && event.target === modal) {
-                closeModal();
-            }
-        });
     }
 
     function decodeContactValue(dataKey) {
@@ -223,6 +216,12 @@ const App = (() => {
         document.body.append(modal);
 
         modal.dataset.triggerClass = triggerElement ? "set" : "";
+
+        modal.addEventListener("click", (event) => {
+            if (event.target === modal) {
+                closeModal();
+            }
+        });
 
         setTimeout(() => {
             modalContent.classList.add("show");
