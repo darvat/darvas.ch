@@ -30,19 +30,6 @@ function sleep(ms) {
   return new Promise((resolve) => setTimeout(resolve, ms));
 }
 
-export function loadDotEnv(envPath = '.env') {
-  if (!fs.existsSync(envPath)) return;
-  const text = fs.readFileSync(envPath, 'utf8');
-  for (const line of text.split(/\r?\n/)) {
-    const trimmed = line.trim();
-    if (!trimmed || trimmed.startsWith('#') || !trimmed.includes('=')) continue;
-    const [rawKey, ...rest] = trimmed.split('=');
-    const key = rawKey.trim();
-    const value = rest.join('=').trim().replace(/^['"]|['"]$/g, '');
-    if (!process.env[key]) process.env[key] = value;
-  }
-}
-
 export function buildQueries({ roles = DEFAULT_ROLES, locations = DEFAULT_LOCATIONS, suffixes = DEFAULT_SUFFIXES } = {}) {
   const seen = new Set();
   const queries = [];
@@ -574,7 +561,7 @@ function parseArgs(argv) {
 }
 
 async function main() {
-  loadDotEnv();
+  if (fs.existsSync('.env')) process.loadEnvFile();
   const options = parseArgs(process.argv.slice(2));
   let generatedAt = new Date().toISOString();
   let results;
