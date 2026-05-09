@@ -2,14 +2,62 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
     <url>
         <loc>https://darvas.ch/</loc>
-        <lastmod>2026-05-06</lastmod>
+        <lastmod>2026-05-09</lastmod>
         <changefreq>monthly</changefreq>
         <priority>1.0</priority>
     </url>
     <url>
-        <loc>https://darvas.ch/ai-engineer-zurich-jobs/</loc>
-        <lastmod>2026-05-07</lastmod>
-        <changefreq>daily</changefreq>
+        <loc>https://darvas.ch/field-notes/</loc>
+        <lastmod>2026-05-09</lastmod>
+        <changefreq>monthly</changefreq>
         <priority>0.8</priority>
+    </url>
+    <url>
+        <loc>https://darvas.ch/field-notes/production-rag/</loc>
+        <lastmod>2026-05-09</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.7</priority>
+    </url>
+    <url>
+        <loc>https://darvas.ch/field-notes/agentic-ai-enterprise/</loc>
+        <lastmod>2026-05-09</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.7</priority>
+    </url>
+    <url>
+        <loc>https://darvas.ch/field-notes/llm-evaluation/</loc>
+        <lastmod>2026-05-09</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.7</priority>
+    </url>
+    <url>
+        <loc>https://darvas.ch/field-notes/ai-platform-architecture/</loc>
+        <lastmod>2026-05-09</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.7</priority>
+    </url>
+    <url>
+        <loc>https://darvas.ch/leadership/</loc>
+        <lastmod>2026-05-09</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.8</priority>
+    </url>
+    <url>
+        <loc>https://darvas.ch/zurich-ai-market/</loc>
+        <lastmod>2026-05-09</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.8</priority>
+    </url>
+    <url>
+        <loc>https://darvas.ch/ai-engineer-zurich-jobs/</loc>
+        <lastmod>2026-05-09</lastmod>
+        <changefreq>daily</changefreq>
+        <priority>0.7</priority>
+    </url>
+    <url>
+        <loc>https://darvas.ch/de/ki-engineer-zuerich/</loc>
+        <lastmod>2026-05-09</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.7</priority>
     </url>
 </urlset>

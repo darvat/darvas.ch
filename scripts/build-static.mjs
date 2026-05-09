@@ -8,6 +8,10 @@ const files = [
   'sitemap.xml',
   'assets',
   'ai-engineer-zurich-jobs',
+  'field-notes',
+  'leadership',
+  'zurich-ai-market',
+  'de',
 ];
 
 async function build() {

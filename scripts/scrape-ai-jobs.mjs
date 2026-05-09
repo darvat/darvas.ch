@@ -153,6 +153,8 @@ function validatePath(filePath, { base = process.cwd() } = {}) {
 const SITE_URL = 'https://darvas.ch';
 const JOBS_PATH = '/ai-engineer-zurich-jobs/';
 const JOBS_URL = `${SITE_URL}${JOBS_PATH}`;
+const MARKET_PATH = '/zurich-ai-market/';
+const MARKET_URL = `${SITE_URL}${MARKET_PATH}`;
 const PAGE_TITLE = 'AI Engineer Zürich Jobs | Zurich AI, ML, LLM & MLOps Roles';
 const PAGE_DESCRIPTION = 'Find refreshed AI Engineer Zürich jobs, machine learning engineer roles, LLM openings, generative AI jobs and MLOps roles around Zurich, Switzerland.';
 
@@ -284,6 +286,12 @@ function buildStructuredData(results, generatedAt) {
           {
             '@type': 'ListItem',
             position: 2,
+            name: 'Zurich AI Engineering Market Radar',
+            item: MARKET_URL,
+          },
+          {
+            '@type': 'ListItem',
+            position: 3,
             name: 'AI Engineer Zürich Jobs',
             item: JOBS_URL,
           },
@@ -405,14 +413,19 @@ ${structuredData}
       <span></span>
     </button>
     <nav class="site-nav" id="site-navigation" aria-label="Primary navigation">
-      <a href="/">Home</a>
-      <a class="active" href="${JOBS_PATH}">AI Jobs</a>
+      <a href="/#profile">Profile</a>
+      <a href="/#experience">Experience</a>
+      <a href="/field-notes/">Field Notes</a>
+      <a href="/leadership/">Leadership</a>
+      <a href="${MARKET_PATH}">Zurich AI Market</a>
+      <a href="/#contact">Contact</a>
     </nav>
   </header>
   <main id="jobs" class="jobs-page">
     <nav class="breadcrumbs" aria-label="Breadcrumb">
       <ol>
         <li><a href="/">Home</a></li>
+        <li><a href="${MARKET_PATH}">Zurich AI Market</a></li>
         <li aria-current="page">AI Engineer Zürich Jobs</li>
       </ol>
     </nav>
@@ -421,6 +434,7 @@ ${structuredData}
       <div class="section-kicker">Zürich AI job market</div>
       <h1>AI Engineer Zürich Jobs</h1>
       <p class="section-lede">Find refreshed AI Engineer Zurich jobs, machine learning engineer roles, LLM openings, generative AI jobs, MLOps roles, NLP roles and AI data science opportunities around Zürich, Switzerland.</p>
+      <p class="section-lede">This is a static search-based snapshot for crawlable job-market coverage. For interpretation of what these hiring signals suggest about production AI maturity, read the <a href="${MARKET_PATH}">Zurich AI Engineering Market Radar</a>.</p>
       <dl class="jobs-stats" aria-label="AI jobs snapshot metadata">
         <div>
           <dt>${results.length}</dt>
@@ -436,6 +450,7 @@ ${structuredData}
         </div>
       </dl>
       <nav class="jobs-topic-links" aria-label="AI jobs page sections">
+        <a href="${MARKET_PATH}">Market interpretation</a>
         <a href="#current-ai-jobs">Current results</a>
         <a href="#tracked-ai-roles">Tracked roles</a>
         <a href="#zurich-ai-job-sources">Sources</a>
@@ -452,6 +467,7 @@ ${structuredData}
         <div class="jobs-copy">
           <p>This page is built for people searching for AI Engineer Zürich jobs, AI Engineer Zurich jobs, machine learning engineer roles, LLM engineer openings, generative AI work, and MLOps opportunities in the Swiss AI market.</p>
           <p>Results are discovered through generic search queries, filtered for AI engineering and Zurich or Switzerland relevance, deduplicated by URL, and cached as static HTML so search engines can crawl the current snapshot without client-side rendering.</p>
+          <p>The snapshot preserves the public result list. The <a href="${MARKET_PATH}">Zurich AI Market Radar</a> explains what these signals reveal about platform roles, production judgment, and senior AI engineering leadership.</p>
         </div>
       </div>
     </section>
