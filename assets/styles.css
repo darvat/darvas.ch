@@ -41,6 +41,22 @@ body.nav-open {
     overflow: hidden;
 }
 
+.nav-overlay {
+    position: fixed;
+    inset: 0;
+    z-index: 99;
+    background: rgba(10, 13, 17, 0.72);
+    backdrop-filter: blur(8px);
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 220ms ease;
+}
+
+body.nav-open .nav-overlay {
+    opacity: 1;
+    pointer-events: auto;
+}
+
 a {
     color: inherit;
 }
@@ -75,7 +91,7 @@ button {
 .site-header {
     position: fixed;
     inset: 0 0 auto 0;
-    z-index: 50;
+    z-index: 100;
     height: var(--header-height);
     display: flex;
     align-items: center;
@@ -145,6 +161,7 @@ button {
 
 .nav-toggle {
     display: none;
+    z-index: 101;
 }
 
 .hero {
@@ -432,6 +449,7 @@ button {
 }
 
 @keyframes sphereFloat {
+
     0%,
     100% {
         transform: translate3d(0, 0, 0) scale(1);
@@ -447,6 +465,7 @@ button {
 }
 
 @keyframes sphereGlint {
+
     0%,
     100% {
         opacity: 0.44;
@@ -465,7 +484,7 @@ button {
     padding: clamp(74px, 10vw, 132px) 0;
 }
 
-main > section {
+main>section {
     scroll-margin-top: var(--header-height);
 }
 
@@ -480,7 +499,7 @@ main > section {
     align-items: start;
 }
 
-.section-grid > * {
+.section-grid>* {
     min-width: 0;
 }
 
@@ -642,7 +661,7 @@ main > section {
 }
 
 .capability-group,
-.credential-columns > div {
+.credential-columns>div {
     min-width: 0;
     padding-top: 24px;
     border-top: 1px solid var(--line);
@@ -864,6 +883,7 @@ main > section {
 }
 
 @media (prefers-reduced-motion: reduce) {
+
     *,
     *::before,
     *::after {
@@ -879,6 +899,7 @@ main > section {
 }
 
 @media (max-width: 1280px) {
+
     .section:not(.contact-section),
     .experience-section {
         width: min(var(--max-width), calc(100% - 78px));
@@ -896,6 +917,7 @@ main > section {
 }
 
 @media (max-width: 1080px) {
+
     .section-grid,
     .contact-grid,
     .jobs-content-grid,
@@ -1303,8 +1325,6 @@ main > section {
         align-content: start;
         gap: 0;
         padding: 24px;
-        background: rgba(16, 24, 32, 0.98);
-        border-left: 1px solid rgba(255, 255, 255, 0.12);
         transform: translateX(100%);
         transition: transform 220ms ease;
     }

@@ -21,6 +21,7 @@ const App = (() => {
         state.siteNav = document.querySelector(".site-nav");
         state.navLinks = document.querySelectorAll(".site-nav a");
         state.scrollTopButton = document.getElementById("scroll-to-top");
+        state.navOverlay = document.getElementById("nav-overlay");
         state.revealItems = document.querySelectorAll("[data-reveal]");
         state.contactButtons = document.querySelectorAll(".reveal-contact");
     }
@@ -44,10 +45,22 @@ const App = (() => {
             });
         });
 
+        if (state.navOverlay) {
+            state.navOverlay.addEventListener("click", () => {
+                closeNavigation();
+            });
+        }
+
         document.addEventListener("keydown", (event) => {
             if (event.key === "Escape") {
                 closeNavigation();
                 closeModal();
+            }
+        });
+
+        window.addEventListener("resize", () => {
+            if (window.innerWidth > 900 && state.siteNav.classList.contains("is-open")) {
+                closeNavigation();
             }
         });
 
