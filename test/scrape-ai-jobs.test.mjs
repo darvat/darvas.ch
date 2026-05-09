@@ -20,6 +20,10 @@ test('sourceFromUrl returns a readable advertising source', () => {
   assert.equal(sourceFromUrl('https://ch.linkedin.com/jobs/view/123?x=1'), 'ch.linkedin.com');
 });
 
+test('sourceFromUrl returns unknown for invalid URLs', () => {
+  assert.equal(sourceFromUrl('not-a-url'), 'unknown');
+});
+
 test('isRelevantJobResult keeps AI engineering job results in Zurich and filters irrelevant pages', () => {
   assert.equal(isRelevantJobResult({
     title: 'Senior AI Engineer Zürich - jobs.ch',
