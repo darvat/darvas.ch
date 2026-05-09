@@ -156,6 +156,17 @@ function escapeAttribute(value) {
   return escapeHtml(value).replaceAll('`', '&#96;');
 }
 
+function validatePath(filePath, { base = process.cwd() } = {}) {
+  const resolved = path.resolve(filePath);
+  const root = path.resolve(base);
+  const relative = path.relative(root, resolved);
+
+  if (relative.startsWith('..') || path.isAbsolute(relative)) {
+    throw new Error(`Security Error: Path traversal detected. Path "${filePath}" is outside the allowed directory.`);
+  }
+  return resolved;
+}
+
 const SITE_URL = 'https://darvas.ch';
 const JOBS_PATH = '/ai-engineer-zurich-jobs/';
 const JOBS_URL = `${SITE_URL}${JOBS_PATH}`;
@@ -573,7 +584,7 @@ async function main() {
   let results;
 
   if (options.fromJson) {
-    const cached = JSON.parse(fs.readFileSync(options.fromJson, 'utf8'));
+    const cached = JSON.parse(fs.readFileSync(validatePath(options.fromJson), 'utf8'));
     generatedAt = cached.generatedAt ?? generatedAt;
     results = cached.results ?? [];
   } else {
@@ -586,9 +597,9 @@ async function main() {
     });
   }
 
-  const out = options.out ?? 'ai-engineer-zurich-jobs/index.html';
-  const jsonOut = options.jsonOut ?? 'data/ai-engineer-zurich-jobs.json';
-  const tableOut = options.tableOut ?? 'data/ai-engineer-zurich-jobs-table.html';
+  const out = validatePath(options.out ?? 'ai-engineer-zurich-jobs/index.html');
+  const jsonOut = validatePath(options.jsonOut ?? 'data/ai-engineer-zurich-jobs.json');
+  const tableOut = validatePath(options.tableOut ?? 'data/ai-engineer-zurich-jobs-table.html');
 
   const page = renderPage(results, { generatedAt });
   const table = renderHtmlTable(results, { generatedAt });
