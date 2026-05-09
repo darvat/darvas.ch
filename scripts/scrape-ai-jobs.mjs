@@ -238,6 +238,35 @@ function renderFaqHtml() {
         </details>`).join('\n');
 }
 
+export function renderMarketSnapshotFacts(results, { generatedAt = new Date().toISOString() } = {}) {
+  const count = results.length;
+  const resultLabel = count === 1 ? '1 deduplicated public result' : `${count} deduplicated public results`;
+  const generatedDate = formatIsoDate(generatedAt);
+
+  return `                    <h3>${escapeHtml(resultLabel)}</h3>
+                    <p>Generated from cached public search data on <time datetime="${escapeAttribute(generatedAt)}">${escapeHtml(generatedDate)}</time>.</p>`;
+}
+
+function updateMarketPageSnapshot({ results, generatedAt, marketOut = 'zurich-ai-market/index.html' } = {}) {
+  const marketPath = validatePath(marketOut);
+  if (!fs.existsSync(marketPath)) return null;
+
+  const startMarker = '<!-- AI_JOBS_SNAPSHOT_START -->';
+  const endMarker = '<!-- AI_JOBS_SNAPSHOT_END -->';
+  const html = fs.readFileSync(marketPath, 'utf8');
+  const pattern = new RegExp(`${startMarker}[\\s\\S]*?${endMarker}`);
+  const replacement = `${startMarker}
+${renderMarketSnapshotFacts(results, { generatedAt })}
+                    ${endMarker}`;
+
+  if (!pattern.test(html)) {
+    throw new Error(`Could not find AI jobs snapshot markers in ${marketOut}`);
+  }
+
+  fs.writeFileSync(marketPath, html.replace(pattern, replacement));
+  return marketPath;
+}
+
 function buildStructuredData(results, generatedAt) {
   return {
     '@context': 'https://schema.org',
@@ -568,6 +597,7 @@ function parseArgs(argv) {
     if (arg === '--out' && next) options.out = next, i += 1;
     else if (arg === '--json-out' && next) options.jsonOut = next, i += 1;
     else if (arg === '--table-out' && next) options.tableOut = next, i += 1;
+    else if (arg === '--market-out' && next) options.marketOut = next, i += 1;
     else if (arg === '--from-json' && next) options.fromJson = next, i += 1;
     else if (arg === '--max-results-per-query' && next) options.maxResultsPerQuery = Number(next), i += 1;
     else if (arg === '--delay-ms' && next) options.delayMs = Number(next), i += 1;
@@ -603,16 +633,19 @@ async function main() {
   const page = renderPage(results, { generatedAt });
   const table = renderHtmlTable(results, { generatedAt });
   const json = JSON.stringify({ generatedAt, count: results.length, results }, null, 2);
+  const marketOut = options.marketOut ?? 'zurich-ai-market/index.html';
 
   for (const filePath of [out, jsonOut, tableOut]) fs.mkdirSync(path.dirname(filePath), { recursive: true });
   fs.writeFileSync(out, page);
   fs.writeFileSync(jsonOut, json + '\n');
   fs.writeFileSync(tableOut, table + '\n');
+  const marketPage = updateMarketPageSnapshot({ results, generatedAt, marketOut });
 
   console.log(`Generated ${results.length} results`);
   console.log(`Page: ${path.resolve(out)}`);
   console.log(`JSON: ${path.resolve(jsonOut)}`);
   console.log(`Table: ${path.resolve(tableOut)}`);
+  if (marketPage) console.log(`Market page: ${path.resolve(marketPage)}`);
 }
 
 const currentFile = fileURLToPath(import.meta.url);

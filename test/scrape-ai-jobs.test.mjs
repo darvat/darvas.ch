@@ -7,6 +7,7 @@ import {
   isRelevantJobResult,
   mergeResults,
   renderHtmlTable,
+  renderMarketSnapshotFacts,
   renderPage,
   buildQueries,
 } from '../scripts/scrape-ai-jobs.mjs';
@@ -89,4 +90,14 @@ test('renderPage includes SEO metadata and safe structured data', () => {
   assert.match(html, /"@type": "ItemList"/);
   assert.doesNotMatch(html, /<script>alert\(1\)<\/script>/);
   assert.match(html, /AI Engineer Zürich &lt;script&gt;alert\(1\)&lt;\/script&gt;/);
+});
+
+test('renderMarketSnapshotFacts derives market page facts from generated jobs data', () => {
+  const html = renderMarketSnapshotFacts([
+    { title: 'AI Engineer', link: 'https://example.com/1' },
+    { title: 'LLM Engineer', link: 'https://example.com/2' },
+  ], { generatedAt: '2026-05-08T18:50:24.625Z' });
+
+  assert.match(html, /2 deduplicated public results/);
+  assert.match(html, /<time datetime="2026-05-08T18:50:24.625Z">2026-05-08<\/time>/);
 });

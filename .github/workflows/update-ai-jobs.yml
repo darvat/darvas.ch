@@ -33,4 +33,4 @@ jobs:
         uses: stefanzweifel/git-auto-commit-action@v5
         with:
           commit_message: 'chore: update AI jobs page'
-          file_pattern: 'ai-engineer-zurich-jobs/index.html data/ai-engineer-zurich-jobs.json data/ai-engineer-zurich-jobs-table.html'
+          file_pattern: 'ai-engineer-zurich-jobs/index.html zurich-ai-market/index.html data/ai-engineer-zurich-jobs.json data/ai-engineer-zurich-jobs-table.html'

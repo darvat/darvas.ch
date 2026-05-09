@@ -87,6 +87,7 @@ Outputs:
 
 ```text
 ai-engineer-zurich-jobs/index.html        # public generated page
+zurich-ai-market/index.html               # market page with refreshed snapshot facts
 data/ai-engineer-zurich-jobs.json         # generated data cache
 data/ai-engineer-zurich-jobs-table.html   # reusable generated HTML table
 ```
@@ -150,7 +151,7 @@ It:
 2. sets up Node.js
 3. runs tests
 4. runs the Serper scraper
-5. commits the refreshed generated job files
+5. commits the refreshed generated job files and the market-radar snapshot block
 
 Add this GitHub Actions repository secret:
 
