@@ -161,32 +161,32 @@ const PAGE_DESCRIPTION = 'Find refreshed AI Engineer Zürich jobs, machine learn
 
 const TRACKED_ROLE_TYPES = [
   {
-    name: 'AI Engineer Zürich jobs',
-    description: 'Production AI systems, AI platform work, model integration, evaluation, and applied software engineering roles.',
+    name: 'AI engineering roles in Zurich',
+    description: 'Production AI systems, model integration, evaluation, and applied software engineering work.',
   },
   {
     name: 'Machine Learning Engineer jobs in Zurich',
-    description: 'ML engineering, model-serving, data pipelines, experimentation, and applied machine learning product roles.',
+    description: 'Model-serving, data pipelines, experimentation, and applied machine learning product work.',
   },
   {
     name: 'LLM Engineer and Generative AI jobs',
-    description: 'Large language model integration, RAG, agentic AI workflows, prompt engineering, and GenAI application roles.',
+    description: 'Large language model integration, RAG, agentic workflows, prompt engineering, and GenAI applications.',
   },
   {
     name: 'MLOps, NLP and AI data science roles',
-    description: 'MLOps engineering, NLP, computer vision, AI data science, and production data workflow opportunities.',
+    description: 'MLOps engineering, NLP, computer vision, AI data science, and production data workflows.',
   },
 ];
 
 const RELATED_SEARCHES = [
-  'AI Engineer Zürich jobs',
-  'AI Engineer Zurich jobs',
-  'Machine Learning Engineer Zurich jobs',
-  'LLM Engineer Zurich jobs',
-  'Generative AI Engineer Zurich jobs',
-  'MLOps Engineer Zurich jobs',
-  'NLP Engineer Switzerland jobs',
-  'AI Software Engineer Zurich jobs',
+  'AI Engineer Zurich',
+  'Machine Learning Engineer Zurich',
+  'LLM Engineer Zurich',
+  'Generative AI Engineer Zurich',
+  'MLOps Engineer Zurich',
+  'NLP Engineer Switzerland',
+  'AI Software Engineer Zurich',
+  'AI Data Scientist Zurich',
 ];
 
 const JOBS_FAQS = [
@@ -448,8 +448,8 @@ ${renderSiteHeader({ indent: '  ' })}
     <section class="section jobs-section jobs-hero">
       <div class="section-kicker">Zürich AI job market</div>
       <h1>AI Engineer Zürich Jobs</h1>
-      <p class="section-lede">Find refreshed AI Engineer Zurich jobs, machine learning engineer roles, LLM openings, generative AI jobs, MLOps roles, NLP roles and AI data science opportunities around Zürich, Switzerland.</p>
-      <p class="section-lede">This is a static search-based snapshot for crawlable job-market coverage. For interpretation of what these hiring signals suggest about production AI maturity, read the <a href="${MARKET_PATH}">Zurich AI Engineering Market Radar</a>.</p>
+      <p class="section-lede">Current public Zurich-area search results for AI engineering, ML, LLM, generative AI, MLOps, NLP, and AI data science roles.</p>
+      <p class="section-lede">Use the table as a starting point, then follow each source for the live posting and application details. For interpretation of the hiring signals, read the <a href="${MARKET_PATH}">Zurich AI Engineering Market Radar</a>.</p>
       <dl class="jobs-stats" aria-label="AI jobs snapshot metadata">
         <div>
           <dt>${results.length}</dt>
@@ -476,13 +476,13 @@ ${renderSiteHeader({ indent: '  ' })}
     <section class="jobs-content-section" id="ai-engineer-zurich-market" aria-labelledby="ai-engineer-zurich-market-title">
       <div class="jobs-content-grid">
         <div>
-          <div class="section-kicker">Search intent match</div>
-          <h2 id="ai-engineer-zurich-market-title">AI engineering jobs in Zürich, from LLM application work to production MLOps.</h2>
+          <div class="section-kicker">Market snapshot</div>
+          <h2 id="ai-engineer-zurich-market-title">What this Zurich AI jobs snapshot covers.</h2>
         </div>
         <div class="jobs-copy">
-          <p>This page is built for people searching for AI Engineer Zürich jobs, AI Engineer Zurich jobs, machine learning engineer roles, LLM engineer openings, generative AI work, and MLOps opportunities in the Swiss AI market.</p>
-          <p>Results are discovered through generic search queries, filtered for AI engineering and Zurich or Switzerland relevance, deduplicated by URL, and cached as static HTML so search engines can crawl the current snapshot without client-side rendering.</p>
-          <p>The snapshot preserves the public result list. The <a href="${MARKET_PATH}">Zurich AI Market Radar</a> explains what these signals reveal about platform roles, production judgment, and senior AI engineering leadership.</p>
+          <p>The snapshot combines public search results for applied AI engineering roles around Zurich: production AI systems, ML engineering, LLM applications, MLOps, NLP, computer vision, and AI data science.</p>
+          <p>Results are discovered through generic search queries, filtered for AI engineering and Zurich or Switzerland relevance, deduplicated by URL, and cached as static HTML.</p>
+          <p>The table is raw market input. The <a href="${MARKET_PATH}">Zurich AI Market Radar</a> explains what these signals reveal about platform roles, production judgment, and senior AI engineering leadership.</p>
         </div>
       </div>
     </section>
