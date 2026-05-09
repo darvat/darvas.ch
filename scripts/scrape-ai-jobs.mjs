@@ -113,9 +113,9 @@ export function mergeResults(queryResults) {
         continue;
       }
       byUrl.set(normalizedUrl, {
-        title: cleanText(item.title),
+        title: cleanTitle(item.title),
         link: normalizedUrl,
-        snippet: cleanText(item.snippet ?? ''),
+        snippet: cleanSnippet(item.snippet ?? ''),
         source: sourceFromUrl(normalizedUrl),
         queries: [query],
       });
@@ -135,8 +135,12 @@ function scoreResult(result) {
   return score;
 }
 
-function cleanText(text) {
-  return String(text ?? '').replace(/\s+/g, ' ').trim();
+function cleanTitle(title) {
+  return String(title ?? '').replace(/\s+/g, ' ').trim();
+}
+
+function cleanSnippet(snippet) {
+  return String(snippet ?? '').replace(/\s+/g, ' ').trim();
 }
 
 function escapeHtml(value) {

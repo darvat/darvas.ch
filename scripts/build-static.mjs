@@ -1,4 +1,4 @@
-import fs from 'node:fs';
+import fs from 'node:fs/promises';
 import path from 'node:path';
 
 const dist = 'dist';
@@ -10,13 +10,26 @@ const files = [
   'ai-engineer-zurich-jobs',
 ];
 
-fs.rmSync(dist, { recursive: true, force: true });
-fs.mkdirSync(dist, { recursive: true });
+async function build() {
+  await fs.rm(dist, { recursive: true, force: true });
+  await fs.mkdir(dist, { recursive: true });
 
-for (const file of files) {
-  if (!fs.existsSync(file)) continue;
-  const target = path.join(dist, file);
-  fs.cpSync(file, target, { recursive: true });
+  await Promise.all(
+    files.map(async (file) => {
+      try {
+        await fs.access(file);
+      } catch {
+        return;
+      }
+      const target = path.join(dist, file);
+      await fs.cp(file, target, { recursive: true });
+    })
+  );
+
+  console.log(`Built static site in ${path.resolve(dist)}`);
 }
 
-console.log(`Built static site in ${path.resolve(dist)}`);
+build().catch((err) => {
+  console.error(err);
+  process.exit(1);
+});
