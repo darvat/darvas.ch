@@ -2,3 +2,5 @@ dist/
 .env
 .wrangler/
 node_modules
+docs/
+.agent/

@@ -1,0 +1,336 @@
+<!DOCTYPE html>
+<html lang="en-CH">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Evaluating LLM Applications in Production | Tamas Darvas</title>
+    <meta name="description"
+        content="How to evaluate production LLM applications with golden datasets, regression tests, qualitative review, risk scoring, observability, and user feedback.">
+    <meta name="author" content="Tamas Darvas">
+    <meta name="robots" content="index, follow, max-image-preview:large">
+    <link rel="canonical" href="https://darvas.ch/field-notes/llm-evaluation/">
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="https://darvas.ch/field-notes/llm-evaluation/">
+    <meta property="og:site_name" content="Tamas Darvas">
+    <meta property="og:locale" content="en_CH">
+    <meta property="og:title" content="Evaluating LLM Applications in Production | Tamas Darvas">
+    <meta property="og:description"
+        content="Evaluation patterns for production LLM quality, risk, regression tests, observability, and user feedback.">
+    <meta property="og:image" content="https://darvas.ch/assets/og-image.png">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta property="article:published_time" content="2026-05-09">
+    <meta property="article:modified_time" content="2026-05-09">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Evaluating LLM Applications in Production">
+    <meta name="twitter:description"
+        content="A practical framework for evaluating correctness, usefulness, risk, regressions, monitoring, and feedback.">
+    <meta name="twitter:image" content="https://darvas.ch/assets/og-image.png">
+    <link rel="icon" href="../../assets/favicon.svg" type="image/svg+xml">
+    <link rel="apple-touch-icon" href="../../assets/apple-touch-icon.png">
+    <meta name="theme-color" content="#101820">
+    <link rel="stylesheet" href="../../assets/styles.css">
+    <script type="application/ld+json">
+        {
+            "@context": "https://schema.org",
+            "@graph": [
+                {
+                    "@type": "Article",
+                    "@id": "https://darvas.ch/field-notes/llm-evaluation/#article",
+                    "headline": "Evaluating LLM applications in production",
+                    "description": "How to evaluate production LLM applications with golden datasets, regression tests, qualitative review, risk scoring, observability, and user feedback.",
+                    "url": "https://darvas.ch/field-notes/llm-evaluation/",
+                    "datePublished": "2026-05-09",
+                    "dateModified": "2026-05-09",
+                    "inLanguage": "en-CH",
+                    "author": {
+                        "@id": "https://darvas.ch/#tamas-darvas"
+                    }
+                },
+                {
+                    "@type": "BreadcrumbList",
+                    "@id": "https://darvas.ch/field-notes/llm-evaluation/#breadcrumb",
+                    "itemListElement": [
+                        {
+                            "@type": "ListItem",
+                            "position": 1,
+                            "name": "Home",
+                            "item": "https://darvas.ch/"
+                        },
+                        {
+                            "@type": "ListItem",
+                            "position": 2,
+                            "name": "Field Notes",
+                            "item": "https://darvas.ch/field-notes/"
+                        },
+                        {
+                            "@type": "ListItem",
+                            "position": 3,
+                            "name": "LLM Evaluation",
+                            "item": "https://darvas.ch/field-notes/llm-evaluation/"
+                        }
+                    ]
+                }
+            ]
+        }
+    </script>
+</head>
+
+<body>
+    <a class="skip-link" href="#article">Skip to article</a>
+    <div class="nav-overlay" id="nav-overlay" aria-hidden="true"></div>
+    <!-- site-header: {"active":"field-notes"} -->
+    <header class="site-header">
+        <a class="brand-mark" href="/" aria-label="Tamas Darvas home"><span>TD</span></a>
+        <button class="nav-toggle" type="button" aria-label="Open navigation" aria-expanded="false" aria-controls="site-navigation">
+            <span></span>
+            <span></span>
+            <span></span>
+        </button>
+        <nav class="site-nav" id="site-navigation" aria-label="Primary navigation">
+            <a href="/#profile">Profile</a>
+            <a href="/#experience">Experience</a>
+            <div class="nav-item has-submenu">
+                <a class="active" href="/field-notes/" aria-haspopup="true">Field Notes</a>
+                <div class="nav-submenu" aria-label="Field Notes submenu">
+                    <a href="/field-notes/">Overview</a>
+                    <a href="/field-notes/production-rag/">Production RAG</a>
+                    <a href="/field-notes/agentic-ai-enterprise/">Agentic AI</a>
+                    <a href="/field-notes/llm-evaluation/">LLM Evaluation</a>
+                    <a href="/field-notes/ai-platform-architecture/">AI Platform Architecture</a>
+                </div>
+            </div>
+            <div class="nav-item has-submenu">
+                <a href="/leadership/" aria-haspopup="true">Leadership</a>
+                <div class="nav-submenu" aria-label="Leadership submenu">
+                    <a href="/leadership/">How I Lead Teams</a>
+                    <a href="/leadership/#leadership-thesis">Leadership Thesis</a>
+                    <a href="/leadership/#leverage-title">How I Create Leverage</a>
+                    <a href="/leadership/#not-optimise-title">What I Do Not Optimise For</a>
+                </div>
+            </div>
+            <a href="/zurich-ai-market/">Zurich AI Market</a>
+            <a href="/#contact">Contact</a>
+        </nav>
+    </header>
+    <!-- /site-header -->
+    <main>
+        <section class="page-hero" aria-labelledby="article-title">
+            <div class="page-hero-inner">
+                <nav class="breadcrumb" aria-label="Breadcrumb">
+                    <ol>
+                        <li><a href="/">Home</a></li>
+                        <li><a href="/field-notes/">Field Notes</a></li>
+                        <li aria-current="page">LLM Evaluation</li>
+                    </ol>
+                </nav>
+                <p class="eyebrow">AI Engineering Field Notes</p>
+                <h1 id="article-title">Evaluating LLM applications in production</h1>
+                <p class="section-lede">
+                    LLM quality is not a dashboard score. It is a release decision across usefulness, correctness,
+                    grounding, policy risk, latency, cost, regressions, and whether users can do their work safely.
+                </p>
+                <div class="article-meta">
+                    <span>Published 2026-05-09</span>
+                    <span>Updated 2026-05-09</span>
+                    <span>7 min read</span>
+                </div>
+            </div>
+        </section>
+
+        <div class="article-layout" id="article">
+            <aside class="article-toc" aria-labelledby="toc-title">
+                <h2 id="toc-title">Contents</h2>
+                <ol>
+                    <li><a href="#score">LLM quality is not a single score</a></li>
+                    <li><a href="#wrong">What usually goes wrong</a></li>
+                    <li><a href="#examples">Use-case examples</a></li>
+                    <li><a href="#separate">Correctness, usefulness, risk</a></li>
+                    <li><a href="#regression">Regression tests</a></li>
+                    <li><a href="#human">Human review</a></li>
+                    <li><a href="#monitoring">Production monitoring</a></li>
+                    <li><a href="#questions">Design review questions</a></li>
+                    <li><a href="#framework">Evaluation framework</a></li>
+                </ol>
+            </aside>
+
+            <article class="article-body">
+                <section id="score">
+                    <h2>LLM quality is not a single score</h2>
+                    <p>
+                        Production LLM evaluation starts with a practical admission: quality depends on the workflow.
+                        A good answer for a support assistant, a coding assistant, a policy search tool, and an internal
+                        summarizer are not measured the same way. Some workflows need precise grounding. Some need
+                        conservative refusal behavior. Some need speed. Some need traceability. A single aggregate score
+                        hides those trade-offs and makes release decisions look simpler than they are.
+                    </p>
+                    <p>
+                        The useful question is not "is the model good?" The useful question is "is this application good
+                        enough for this workflow, with these users, these data boundaries, and these failure costs?"
+                        That moves evaluation from model comparison into production engineering.
+                    </p>
+                </section>
+
+                <section id="wrong">
+                    <h2>What usually goes wrong</h2>
+                    <p>
+                        The first failure is evaluating only happy-path examples. Teams ask a few expected questions,
+                        see fluent answers, and move on. Real users then ask ambiguous, incomplete, adversarial, stale,
+                        or permission-sensitive questions. The system behaves differently because the evaluation set did
+                        not represent the risk surface.
+                    </p>
+                    <p>
+                        The second failure is mixing failure types. A grounded answer can still be unhelpful. A helpful
+                        answer can still violate policy. A safe refusal can still frustrate users if the system should
+                        have had enough context. Production evaluation has to separate these dimensions so the team
+                        knows what to fix.
+                    </p>
+                    <div class="decision-rule">
+                        <h3>Production decision rule</h3>
+                        <p>
+                            Do not release an LLM application on average quality alone. Release only when high-risk
+                            examples, regression behavior, policy boundaries, and user-facing failure modes have been
+                            reviewed explicitly.
+                        </p>
+                    </div>
+                </section>
+
+                <section id="examples">
+                    <h2>Start with use-case-specific examples</h2>
+                    <p>
+                        A useful evaluation set starts with real tasks. What are users trying to decide, write, find,
+                        summarize, approve, or change? For each task, collect examples that represent normal work,
+                        difficult work, and unacceptable failure. The examples should include the input, expected
+                        behavior, relevant context, and the reason the case matters.
+                    </p>
+                    <p>
+                        In enterprise settings, I like to tag examples by workflow, risk, data dependency, and expected
+                        behavior. A small, well-curated set is more valuable than a large set nobody understands. The
+                        team should know why each example exists.
+                    </p>
+                    <p>
+                        I also separate examples that are release blockers from examples that are learning signals. A
+                        release blocker protects a boundary the product must not cross, such as exposing restricted
+                        context or giving an answer where the correct behavior is to refuse. A learning signal is still
+                        valuable, but it may feed prioritization rather than stop a release. This distinction keeps
+                        evaluation useful when teams are moving quickly.
+                    </p>
+                </section>
+
+                <section id="separate">
+                    <h2>Separate correctness, usefulness, and risk</h2>
+                    <p>
+                        Correctness asks whether the answer is factually and procedurally right. Usefulness asks whether
+                        the answer helps the user move forward. Risk asks whether the answer exposes data, violates
+                        policy, overstates confidence, or encourages a harmful action. These dimensions can disagree,
+                        so the evaluation framework should score or review them separately.
+                    </p>
+                    <p>
+                        This is where AI, people, data, and code meet. AI behavior needs measurement. People define
+                        acceptable risk and review ambiguous cases. Data controls grounding and permissions. Code turns
+                        the framework into repeatable tests, dashboards, release checks, and rollback paths.
+                    </p>
+                </section>
+
+                <section id="regression">
+                    <h2>Regression tests matter after every prompt or model change</h2>
+                    <p>
+                        LLM applications change even when the surrounding product looks stable. A prompt adjustment, a
+                        retrieval change, a model version change, a policy update, or a new tool can improve one class
+                        of answers and weaken another. Regression tests protect the workflows that matter most.
+                    </p>
+                    <p>
+                        Regression coverage should include examples that previously failed, examples that protect
+                        high-value behavior, and examples that represent policy boundaries. The point is not to freeze
+                        the product. The point is to make change visible before users discover the regression.
+                    </p>
+                    <p>
+                        Regression results should be reviewed like other engineering signals. If a model change improves
+                        summaries but weakens grounded answers, the team needs a product decision, not only a technical
+                        score. Sometimes the right answer is to split workflows, add routing, change instructions, or
+                        keep a previous model for a narrow path.
+                    </p>
+                </section>
+
+                <section id="human">
+                    <h2>Human review is still part of evaluation</h2>
+                    <p>
+                        Automated checks can catch many problems, but they cannot replace human judgment for usefulness,
+                        tone, workflow fit, or nuanced risk. Human review should be structured. Reviewers need clear
+                        criteria, examples of unacceptable answers, and a way to record why an answer passed or failed.
+                    </p>
+                    <p>
+                        The leadership implication is that evaluation is not owned only by an ML engineer. It is a team
+                        capability spanning product, domain experts, engineering, risk, and operations. Seniority shows
+                        up in making those responsibilities explicit.
+                    </p>
+                </section>
+
+                <section id="monitoring">
+                    <h2>Production monitoring closes the loop</h2>
+                    <p>
+                        Offline evaluation is necessary but incomplete. Production monitoring should show usage,
+                        latency, cost, refusal rates, missing-answer rates, user feedback, incident signals, and drift in
+                        input patterns. The team should regularly compare production behavior against the evaluation set
+                        and add new cases when real users expose gaps.
+                    </p>
+                    <p>
+                        A useful feedback loop protects sensitive content. Teams can collect enough signal to improve
+                        the system without copying private prompts and answers into broad-access tools.
+                    </p>
+                    <p>
+                        Monitoring also protects leadership from false confidence. Usage growth does not prove quality.
+                        Low complaint volume does not prove trust. A production review should connect telemetry,
+                        evaluation examples, support signals, and qualitative feedback so the team can decide what to
+                        improve next.
+                    </p>
+                </section>
+
+                <section class="design-review-questions" id="questions">
+                    <h2>Questions I would ask in a design review</h2>
+                    <ul>
+                        <li>What does a good answer mean for this specific workflow?</li>
+                        <li>Which examples represent high-risk failures?</li>
+                        <li>How are prompt, model, retrieval, and policy changes regression-tested?</li>
+                        <li>Who decides when quality is good enough for release?</li>
+                        <li>What user feedback is collected without exposing sensitive content?</li>
+                    </ul>
+                </section>
+
+                <section class="checklist-block" id="framework">
+                    <h2>LLM evaluation framework</h2>
+                    <ul>
+                        <li>Task success.</li>
+                        <li>Grounding and citation quality.</li>
+                        <li>Safety and policy compliance.</li>
+                        <li>Latency and cost.</li>
+                        <li>Regression behavior.</li>
+                        <li>User feedback.</li>
+                    </ul>
+                </section>
+
+                <p>
+                    Related field note: <a href="/field-notes/production-rag/">Production RAG: what matters after the
+                        demo</a> shows how retrieval quality, missing-answer behavior, and feedback ownership become
+                    evaluation concerns once document-grounded AI reaches real users.
+                </p>
+            </article>
+        </div>
+
+        <section class="cta-panel" aria-labelledby="article-cta">
+            <h2 id="article-cta">If you are building production AI platforms or hiring for AI engineering leadership in Zurich, I am open to selected conversations.</h2>
+            <div class="cta-actions">
+                <a class="button primary" href="/leadership/">See how I lead engineering teams</a>
+                <a class="button secondary" href="/#contact">Get in touch</a>
+            </div>
+        </section>
+    </main>
+
+    <button id="scroll-to-top" class="scroll-to-top" type="button" aria-label="Scroll to top">
+        <span aria-hidden="true">&#8593;</span>
+    </button>
+    <script src="../../assets/main.js" defer></script>
+</body>
+
+</html>

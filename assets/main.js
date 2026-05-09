@@ -31,12 +31,10 @@ const App = (() => {
             return;
         }
 
+        state.navLabels = resolveNavigationLabels();
+
         state.navToggle.addEventListener("click", () => {
-            const isOpen = state.siteNav.classList.toggle("is-open");
-            state.navToggle.classList.toggle("is-open", isOpen);
-            state.navToggle.setAttribute("aria-expanded", String(isOpen));
-            state.navToggle.setAttribute("aria-label", isOpen ? "Close navigation" : "Open navigation");
-            state.body.classList.toggle("nav-open", isOpen);
+            setNavigationState(!state.siteNav.classList.contains("is-open"));
         });
 
         state.navLinks.forEach((link) => {
@@ -97,16 +95,29 @@ const App = (() => {
         sections.forEach((section) => observer.observe(section));
     }
 
+    function resolveNavigationLabels() {
+        const language = (document.documentElement.lang || "").toLowerCase();
+        const open = state.navToggle.getAttribute("aria-label") || "Open navigation";
+        const close = state.navToggle.dataset.closeLabel
+            || (language.startsWith("de") ? "Navigation schliessen" : "Close navigation");
+
+        return { open, close };
+    }
+
+    function setNavigationState(isOpen) {
+        state.siteNav.classList.toggle("is-open", isOpen);
+        state.navToggle.classList.toggle("is-open", isOpen);
+        state.navToggle.setAttribute("aria-expanded", String(isOpen));
+        state.navToggle.setAttribute("aria-label", isOpen ? state.navLabels.close : state.navLabels.open);
+        state.body.classList.toggle("nav-open", isOpen);
+    }
+
     function closeNavigation() {
         if (!state.navToggle || !state.siteNav) {
             return;
         }
 
-        state.siteNav.classList.remove("is-open");
-        state.navToggle.classList.remove("is-open");
-        state.navToggle.setAttribute("aria-expanded", "false");
-        state.navToggle.setAttribute("aria-label", "Open navigation");
-        state.body.classList.remove("nav-open");
+        setNavigationState(false);
     }
 
     function initScrollTop() {

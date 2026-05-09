@@ -1,6 +1,7 @@
 import fs from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
+import { renderSiteHeader } from './site-chrome.mjs';
 
 const DEFAULT_ROLES = [
   'AI Engineer',
@@ -153,6 +154,8 @@ function validatePath(filePath, { base = process.cwd() } = {}) {
 const SITE_URL = 'https://darvas.ch';
 const JOBS_PATH = '/ai-engineer-zurich-jobs/';
 const JOBS_URL = `${SITE_URL}${JOBS_PATH}`;
+const MARKET_PATH = '/zurich-ai-market/';
+const MARKET_URL = `${SITE_URL}${MARKET_PATH}`;
 const PAGE_TITLE = 'AI Engineer Zürich Jobs | Zurich AI, ML, LLM & MLOps Roles';
 const PAGE_DESCRIPTION = 'Find refreshed AI Engineer Zürich jobs, machine learning engineer roles, LLM openings, generative AI jobs and MLOps roles around Zurich, Switzerland.';
 
@@ -236,6 +239,35 @@ function renderFaqHtml() {
         </details>`).join('\n');
 }
 
+export function renderMarketSnapshotFacts(results, { generatedAt = new Date().toISOString() } = {}) {
+  const count = results.length;
+  const resultLabel = count === 1 ? '1 deduplicated public result' : `${count} deduplicated public results`;
+  const generatedDate = formatIsoDate(generatedAt);
+
+  return `                    <h3>${escapeHtml(resultLabel)}</h3>
+                    <p>Generated from cached public search data on <time datetime="${escapeAttribute(generatedAt)}">${escapeHtml(generatedDate)}</time>.</p>`;
+}
+
+function updateMarketPageSnapshot({ results, generatedAt, marketOut = 'zurich-ai-market/index.html' } = {}) {
+  const marketPath = validatePath(marketOut);
+  if (!fs.existsSync(marketPath)) return null;
+
+  const startMarker = '<!-- AI_JOBS_SNAPSHOT_START -->';
+  const endMarker = '<!-- AI_JOBS_SNAPSHOT_END -->';
+  const html = fs.readFileSync(marketPath, 'utf8');
+  const pattern = new RegExp(`${startMarker}[\\s\\S]*?${endMarker}`);
+  const replacement = `${startMarker}
+${renderMarketSnapshotFacts(results, { generatedAt })}
+                    ${endMarker}`;
+
+  if (!pattern.test(html)) {
+    throw new Error(`Could not find AI jobs snapshot markers in ${marketOut}`);
+  }
+
+  fs.writeFileSync(marketPath, html.replace(pattern, replacement));
+  return marketPath;
+}
+
 function buildStructuredData(results, generatedAt) {
   return {
     '@context': 'https://schema.org',
@@ -284,6 +316,12 @@ function buildStructuredData(results, generatedAt) {
           {
             '@type': 'ListItem',
             position: 2,
+            name: 'Zurich AI Engineering Market Radar',
+            item: MARKET_URL,
+          },
+          {
+            '@type': 'ListItem',
+            position: 3,
             name: 'AI Engineer Zürich Jobs',
             item: JOBS_URL,
           },
@@ -397,22 +435,12 @@ ${structuredData}
 </head>
 <body>
   <a class="skip-link" href="#jobs">Skip to jobs</a>
-  <header class="site-header">
-    <a class="brand-mark" href="/" aria-label="Tamas Darvas home"><span>TD</span></a>
-    <button class="nav-toggle" type="button" aria-label="Open navigation" aria-expanded="false" aria-controls="site-navigation">
-      <span></span>
-      <span></span>
-      <span></span>
-    </button>
-    <nav class="site-nav" id="site-navigation" aria-label="Primary navigation">
-      <a href="/">Home</a>
-      <a class="active" href="${JOBS_PATH}">AI Jobs</a>
-    </nav>
-  </header>
+${renderSiteHeader({ indent: '  ' })}
   <main id="jobs" class="jobs-page">
     <nav class="breadcrumbs" aria-label="Breadcrumb">
       <ol>
         <li><a href="/">Home</a></li>
+        <li><a href="${MARKET_PATH}">Zurich AI Market</a></li>
         <li aria-current="page">AI Engineer Zürich Jobs</li>
       </ol>
     </nav>
@@ -421,6 +449,7 @@ ${structuredData}
       <div class="section-kicker">Zürich AI job market</div>
       <h1>AI Engineer Zürich Jobs</h1>
       <p class="section-lede">Find refreshed AI Engineer Zurich jobs, machine learning engineer roles, LLM openings, generative AI jobs, MLOps roles, NLP roles and AI data science opportunities around Zürich, Switzerland.</p>
+      <p class="section-lede">This is a static search-based snapshot for crawlable job-market coverage. For interpretation of what these hiring signals suggest about production AI maturity, read the <a href="${MARKET_PATH}">Zurich AI Engineering Market Radar</a>.</p>
       <dl class="jobs-stats" aria-label="AI jobs snapshot metadata">
         <div>
           <dt>${results.length}</dt>
@@ -436,6 +465,7 @@ ${structuredData}
         </div>
       </dl>
       <nav class="jobs-topic-links" aria-label="AI jobs page sections">
+        <a href="${MARKET_PATH}">Market interpretation</a>
         <a href="#current-ai-jobs">Current results</a>
         <a href="#tracked-ai-roles">Tracked roles</a>
         <a href="#zurich-ai-job-sources">Sources</a>
@@ -452,6 +482,7 @@ ${structuredData}
         <div class="jobs-copy">
           <p>This page is built for people searching for AI Engineer Zürich jobs, AI Engineer Zurich jobs, machine learning engineer roles, LLM engineer openings, generative AI work, and MLOps opportunities in the Swiss AI market.</p>
           <p>Results are discovered through generic search queries, filtered for AI engineering and Zurich or Switzerland relevance, deduplicated by URL, and cached as static HTML so search engines can crawl the current snapshot without client-side rendering.</p>
+          <p>The snapshot preserves the public result list. The <a href="${MARKET_PATH}">Zurich AI Market Radar</a> explains what these signals reveal about platform roles, production judgment, and senior AI engineering leadership.</p>
         </div>
       </div>
     </section>
@@ -552,6 +583,7 @@ function parseArgs(argv) {
     if (arg === '--out' && next) options.out = next, i += 1;
     else if (arg === '--json-out' && next) options.jsonOut = next, i += 1;
     else if (arg === '--table-out' && next) options.tableOut = next, i += 1;
+    else if (arg === '--market-out' && next) options.marketOut = next, i += 1;
     else if (arg === '--from-json' && next) options.fromJson = next, i += 1;
     else if (arg === '--max-results-per-query' && next) options.maxResultsPerQuery = Number(next), i += 1;
     else if (arg === '--delay-ms' && next) options.delayMs = Number(next), i += 1;
@@ -587,16 +619,19 @@ async function main() {
   const page = renderPage(results, { generatedAt });
   const table = renderHtmlTable(results, { generatedAt });
   const json = JSON.stringify({ generatedAt, count: results.length, results }, null, 2);
+  const marketOut = options.marketOut ?? 'zurich-ai-market/index.html';
 
   for (const filePath of [out, jsonOut, tableOut]) fs.mkdirSync(path.dirname(filePath), { recursive: true });
   fs.writeFileSync(out, page);
   fs.writeFileSync(jsonOut, json + '\n');
   fs.writeFileSync(tableOut, table + '\n');
+  const marketPage = updateMarketPageSnapshot({ results, generatedAt, marketOut });
 
   console.log(`Generated ${results.length} results`);
   console.log(`Page: ${path.resolve(out)}`);
   console.log(`JSON: ${path.resolve(jsonOut)}`);
   console.log(`Table: ${path.resolve(tableOut)}`);
+  if (marketPage) console.log(`Market page: ${path.resolve(marketPage)}`);
 }
 
 const currentFile = fileURLToPath(import.meta.url);

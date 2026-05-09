@@ -14,8 +14,10 @@ The site includes a generated `/ai-engineer-zurich-jobs/` page with a static HTM
 ├── assets/                            # Public CSS, JS, favicons, OG images
 ├── data/                              # Generated job data/table cache, not deployed
 ├── scripts/
+│   ├── site-chrome.mjs                # Shared header/navigation renderer
 │   ├── scrape-ai-jobs.mjs             # Serper-based generic job scraper
-│   └── build-static.mjs               # Copies deployable static files to dist/
+│   ├── sync-site-chrome.mjs           # Refreshes managed header blocks
+│   └── build-static.mjs               # Builds deployable static files in dist/
 ├── test/                              # Node test suite
 ├── wrangler.jsonc                     # Cloudflare/Wrangler config
 ├── .assetsignore                      # Excludes non-public files from Worker assets
@@ -60,11 +62,17 @@ Build static deploy artifacts:
 npm run build
 ```
 
-This creates `dist/` containing only public static files:
+This creates `dist/` containing only public static files. Hand-authored HTML
+pages keep a rendered header between `<!-- site-header: {...} -->` markers, and
+the build refreshes that managed block through `scripts/site-chrome.mjs`.
 
 ```text
 dist/index.html
 dist/ai-engineer-zurich-jobs/index.html
+dist/field-notes/*
+dist/leadership/index.html
+dist/zurich-ai-market/index.html
+dist/de/ki-engineer-zuerich/index.html
 dist/assets/*
 dist/robots.txt
 dist/sitemap.xml
@@ -87,8 +95,18 @@ Outputs:
 
 ```text
 ai-engineer-zurich-jobs/index.html        # public generated page
+zurich-ai-market/index.html               # market page with refreshed snapshot facts
 data/ai-engineer-zurich-jobs.json         # generated data cache
 data/ai-engineer-zurich-jobs-table.html   # reusable generated HTML table
+```
+
+The generated jobs page also uses the shared header/navigation renderer.
+
+After changing shared header/navigation structure, refresh the managed header
+blocks in hand-authored pages:
+
+```bash
+npm run sync:site-chrome
 ```
 
 Useful scraper options:
@@ -124,6 +142,10 @@ Deployed:
 
 - `dist/index.html`
 - `dist/ai-engineer-zurich-jobs/index.html`
+- `dist/field-notes/*`
+- `dist/leadership/index.html`
+- `dist/zurich-ai-market/index.html`
+- `dist/de/ki-engineer-zuerich/index.html`
 - `dist/assets/*`
 - `dist/robots.txt`
 - `dist/sitemap.xml`
@@ -150,7 +172,7 @@ It:
 2. sets up Node.js
 3. runs tests
 4. runs the Serper scraper
-5. commits the refreshed generated job files
+5. commits the refreshed generated job files and the market-radar snapshot block
 
 Add this GitHub Actions repository secret:
 
@@ -189,4 +211,4 @@ Then check:
 find dist -maxdepth 3 -type f | sort
 ```
 
-Expected public files only: homepage, jobs page, assets, robots.txt, and sitemap.xml.
+Expected public files only: site HTML pages, assets, robots.txt, and sitemap.xml.

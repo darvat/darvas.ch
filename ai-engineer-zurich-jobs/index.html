@@ -106,6 +106,12 @@
         {
           "@type": "ListItem",
           "position": 2,
+          "name": "Zurich AI Engineering Market Radar",
+          "item": "https://darvas.ch/zurich-ai-market/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
           "name": "AI Engineer Zürich Jobs",
           "item": "https://darvas.ch/ai-engineer-zurich-jobs/"
         }
@@ -586,21 +592,43 @@
 <body>
   <a class="skip-link" href="#jobs">Skip to jobs</a>
   <header class="site-header">
-    <a class="brand-mark" href="/" aria-label="Tamas Darvas home"><span>TD</span></a>
-    <button class="nav-toggle" type="button" aria-label="Open navigation" aria-expanded="false" aria-controls="site-navigation">
-      <span></span>
-      <span></span>
-      <span></span>
-    </button>
-    <nav class="site-nav" id="site-navigation" aria-label="Primary navigation">
-      <a href="/">Home</a>
-      <a class="active" href="/ai-engineer-zurich-jobs/">AI Jobs</a>
-    </nav>
+      <a class="brand-mark" href="/" aria-label="Tamas Darvas home"><span>TD</span></a>
+      <button class="nav-toggle" type="button" aria-label="Open navigation" aria-expanded="false" aria-controls="site-navigation">
+          <span></span>
+          <span></span>
+          <span></span>
+      </button>
+      <nav class="site-nav" id="site-navigation" aria-label="Primary navigation">
+          <a href="/#profile">Profile</a>
+          <a href="/#experience">Experience</a>
+          <div class="nav-item has-submenu">
+              <a href="/field-notes/" aria-haspopup="true">Field Notes</a>
+              <div class="nav-submenu" aria-label="Field Notes submenu">
+                  <a href="/field-notes/">Overview</a>
+                  <a href="/field-notes/production-rag/">Production RAG</a>
+                  <a href="/field-notes/agentic-ai-enterprise/">Agentic AI</a>
+                  <a href="/field-notes/llm-evaluation/">LLM Evaluation</a>
+                  <a href="/field-notes/ai-platform-architecture/">AI Platform Architecture</a>
+              </div>
+          </div>
+          <div class="nav-item has-submenu">
+              <a href="/leadership/" aria-haspopup="true">Leadership</a>
+              <div class="nav-submenu" aria-label="Leadership submenu">
+                  <a href="/leadership/">How I Lead Teams</a>
+                  <a href="/leadership/#leadership-thesis">Leadership Thesis</a>
+                  <a href="/leadership/#leverage-title">How I Create Leverage</a>
+                  <a href="/leadership/#not-optimise-title">What I Do Not Optimise For</a>
+              </div>
+          </div>
+          <a href="/zurich-ai-market/">Zurich AI Market</a>
+          <a href="/#contact">Contact</a>
+      </nav>
   </header>
   <main id="jobs" class="jobs-page">
     <nav class="breadcrumbs" aria-label="Breadcrumb">
       <ol>
         <li><a href="/">Home</a></li>
+        <li><a href="/zurich-ai-market/">Zurich AI Market</a></li>
         <li aria-current="page">AI Engineer Zürich Jobs</li>
       </ol>
     </nav>
@@ -609,6 +637,7 @@
       <div class="section-kicker">Zürich AI job market</div>
       <h1>AI Engineer Zürich Jobs</h1>
       <p class="section-lede">Find refreshed AI Engineer Zurich jobs, machine learning engineer roles, LLM openings, generative AI jobs, MLOps roles, NLP roles and AI data science opportunities around Zürich, Switzerland.</p>
+      <p class="section-lede">This is a static search-based snapshot for crawlable job-market coverage. For interpretation of what these hiring signals suggest about production AI maturity, read the <a href="/zurich-ai-market/">Zurich AI Engineering Market Radar</a>.</p>
       <dl class="jobs-stats" aria-label="AI jobs snapshot metadata">
         <div>
           <dt>60</dt>
@@ -624,6 +653,7 @@
         </div>
       </dl>
       <nav class="jobs-topic-links" aria-label="AI jobs page sections">
+        <a href="/zurich-ai-market/">Market interpretation</a>
         <a href="#current-ai-jobs">Current results</a>
         <a href="#tracked-ai-roles">Tracked roles</a>
         <a href="#zurich-ai-job-sources">Sources</a>
@@ -640,6 +670,7 @@
         <div class="jobs-copy">
           <p>This page is built for people searching for AI Engineer Zürich jobs, AI Engineer Zurich jobs, machine learning engineer roles, LLM engineer openings, generative AI work, and MLOps opportunities in the Swiss AI market.</p>
           <p>Results are discovered through generic search queries, filtered for AI engineering and Zurich or Switzerland relevance, deduplicated by URL, and cached as static HTML so search engines can crawl the current snapshot without client-side rendering.</p>
+          <p>The snapshot preserves the public result list. The <a href="/zurich-ai-market/">Zurich AI Market Radar</a> explains what these signals reveal about platform roles, production judgment, and senior AI engineering leadership.</p>
         </div>
       </div>
     </section>

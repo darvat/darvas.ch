@@ -8,6 +8,7 @@
     "build": "node scripts/build-static.mjs",
     "preview": "npm run build && npx wrangler pages dev dist",
     "scrape:ai-jobs": "node scripts/scrape-ai-jobs.mjs",
+    "sync:site-chrome": "node scripts/sync-site-chrome.mjs",
     "test": "node --test test/*.test.mjs"
   }
 }

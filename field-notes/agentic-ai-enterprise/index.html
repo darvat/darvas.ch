@@ -1,0 +1,329 @@
+<!DOCTYPE html>
+<html lang="en-CH">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Agentic AI in Regulated Enterprises | Tamas Darvas</title>
+    <meta name="description"
+        content="Practical patterns for using agentic AI in regulated enterprises, including approval flows, auditability, bounded autonomy, tool permissions, and failure modes.">
+    <meta name="author" content="Tamas Darvas">
+    <meta name="robots" content="index, follow, max-image-preview:large">
+    <link rel="canonical" href="https://darvas.ch/field-notes/agentic-ai-enterprise/">
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="https://darvas.ch/field-notes/agentic-ai-enterprise/">
+    <meta property="og:site_name" content="Tamas Darvas">
+    <meta property="og:locale" content="en_CH">
+    <meta property="og:title" content="Agentic AI in Regulated Enterprises | Tamas Darvas">
+    <meta property="og:description"
+        content="Practical patterns for approval flows, auditability, bounded autonomy, tool permissions, and agentic AI failure modes.">
+    <meta property="og:image" content="https://darvas.ch/assets/og-image.png">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta property="article:published_time" content="2026-05-09">
+    <meta property="article:modified_time" content="2026-05-09">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Agentic AI in Regulated Enterprises">
+    <meta name="twitter:description"
+        content="How to design approval, auditability, tool permissions, and failure boundaries for enterprise agents.">
+    <meta name="twitter:image" content="https://darvas.ch/assets/og-image.png">
+    <link rel="icon" href="../../assets/favicon.svg" type="image/svg+xml">
+    <link rel="apple-touch-icon" href="../../assets/apple-touch-icon.png">
+    <meta name="theme-color" content="#101820">
+    <link rel="stylesheet" href="../../assets/styles.css">
+    <script type="application/ld+json">
+        {
+            "@context": "https://schema.org",
+            "@graph": [
+                {
+                    "@type": "Article",
+                    "@id": "https://darvas.ch/field-notes/agentic-ai-enterprise/#article",
+                    "headline": "Agentic AI in regulated enterprises",
+                    "description": "Practical patterns for using agentic AI in regulated enterprises, including approval flows, auditability, bounded autonomy, tool permissions, and failure modes.",
+                    "url": "https://darvas.ch/field-notes/agentic-ai-enterprise/",
+                    "datePublished": "2026-05-09",
+                    "dateModified": "2026-05-09",
+                    "inLanguage": "en-CH",
+                    "author": {
+                        "@id": "https://darvas.ch/#tamas-darvas"
+                    }
+                },
+                {
+                    "@type": "BreadcrumbList",
+                    "@id": "https://darvas.ch/field-notes/agentic-ai-enterprise/#breadcrumb",
+                    "itemListElement": [
+                        {
+                            "@type": "ListItem",
+                            "position": 1,
+                            "name": "Home",
+                            "item": "https://darvas.ch/"
+                        },
+                        {
+                            "@type": "ListItem",
+                            "position": 2,
+                            "name": "Field Notes",
+                            "item": "https://darvas.ch/field-notes/"
+                        },
+                        {
+                            "@type": "ListItem",
+                            "position": 3,
+                            "name": "Agentic AI in regulated enterprises",
+                            "item": "https://darvas.ch/field-notes/agentic-ai-enterprise/"
+                        }
+                    ]
+                }
+            ]
+        }
+    </script>
+</head>
+
+<body>
+    <a class="skip-link" href="#article">Skip to article</a>
+    <div class="nav-overlay" id="nav-overlay" aria-hidden="true"></div>
+    <!-- site-header: {"active":"field-notes"} -->
+    <header class="site-header">
+        <a class="brand-mark" href="/" aria-label="Tamas Darvas home"><span>TD</span></a>
+        <button class="nav-toggle" type="button" aria-label="Open navigation" aria-expanded="false" aria-controls="site-navigation">
+            <span></span>
+            <span></span>
+            <span></span>
+        </button>
+        <nav class="site-nav" id="site-navigation" aria-label="Primary navigation">
+            <a href="/#profile">Profile</a>
+            <a href="/#experience">Experience</a>
+            <div class="nav-item has-submenu">
+                <a class="active" href="/field-notes/" aria-haspopup="true">Field Notes</a>
+                <div class="nav-submenu" aria-label="Field Notes submenu">
+                    <a href="/field-notes/">Overview</a>
+                    <a href="/field-notes/production-rag/">Production RAG</a>
+                    <a href="/field-notes/agentic-ai-enterprise/">Agentic AI</a>
+                    <a href="/field-notes/llm-evaluation/">LLM Evaluation</a>
+                    <a href="/field-notes/ai-platform-architecture/">AI Platform Architecture</a>
+                </div>
+            </div>
+            <div class="nav-item has-submenu">
+                <a href="/leadership/" aria-haspopup="true">Leadership</a>
+                <div class="nav-submenu" aria-label="Leadership submenu">
+                    <a href="/leadership/">How I Lead Teams</a>
+                    <a href="/leadership/#leadership-thesis">Leadership Thesis</a>
+                    <a href="/leadership/#leverage-title">How I Create Leverage</a>
+                    <a href="/leadership/#not-optimise-title">What I Do Not Optimise For</a>
+                </div>
+            </div>
+            <a href="/zurich-ai-market/">Zurich AI Market</a>
+            <a href="/#contact">Contact</a>
+        </nav>
+    </header>
+    <!-- /site-header -->
+    <main>
+        <section class="page-hero" aria-labelledby="article-title">
+            <div class="page-hero-inner">
+                <nav class="breadcrumb" aria-label="Breadcrumb">
+                    <ol>
+                        <li><a href="/">Home</a></li>
+                        <li><a href="/field-notes/">Field Notes</a></li>
+                        <li aria-current="page">Agentic AI</li>
+                    </ol>
+                </nav>
+                <p class="eyebrow">AI Engineering Field Notes</p>
+                <h1 id="article-title">Agentic AI in regulated enterprises</h1>
+                <p class="section-lede">
+                    Agents are useful when a workflow needs planning, tool use, and adaptive execution. They become risky
+                    when autonomy expands faster than approval, auditability, permission design, and failure handling.
+                </p>
+                <div class="article-meta">
+                    <span>Published 2026-05-09</span>
+                    <span>Updated 2026-05-09</span>
+                    <span>7 min read</span>
+                </div>
+            </div>
+        </section>
+
+        <div class="article-layout" id="article">
+            <aside class="article-toc" aria-labelledby="toc-title">
+                <h2 id="toc-title">Contents</h2>
+                <ol>
+                    <li><a href="#workflow">Agents are useful when the workflow is the product</a></li>
+                    <li><a href="#wrong">What usually goes wrong</a></li>
+                    <li><a href="#autonomy">Bound autonomy before scaling it</a></li>
+                    <li><a href="#tools">Tool permissions</a></li>
+                    <li><a href="#approval">Human approval</a></li>
+                    <li><a href="#auditability">Auditability</a></li>
+                    <li><a href="#avoid">Where not to use agents</a></li>
+                    <li><a href="#questions">Design review questions</a></li>
+                    <li><a href="#checklist">Design checklist</a></li>
+                </ol>
+            </aside>
+
+            <article class="article-body">
+                <section id="workflow">
+                    <h2>Agents are useful when the workflow is the product</h2>
+                    <p>
+                        Agentic AI is strongest when the value is not only an answer but a sequence of controlled steps:
+                        inspect context, choose a tool, ask for missing input, draft a change, request approval, and
+                        record what happened. That is a workflow product, not a chatbot feature. The design question is
+                        therefore not "can the model decide?" but "which decisions should the system make, which should
+                        a person approve, and which should never be automated?"
+                    </p>
+                    <p>
+                        In regulated enterprise settings, autonomy has to earn trust. Production AI sits at the
+                        intersection of AI, people, data, and code: model reasoning, human accountability, permissioned
+                        data, and reliable tool integration. Agent design fails when those parts are treated separately.
+                        A fluent agent with unclear ownership, broad tool access, and weak audit trails is not a mature
+                        system.
+                    </p>
+                </section>
+
+                <section id="wrong">
+                    <h2>What usually goes wrong</h2>
+                    <p>
+                        Teams often start with a broad agent objective because the demo looks better when the agent can
+                        do many things. The first problem appears when the agent has to act inside real systems. Can it
+                        read data? Change data? Send messages? Trigger workflows? Call external services? Every new
+                        tool changes the risk profile. If the permissions model is not explicit, the agent quietly
+                        becomes a privileged integration layer with probabilistic behavior.
+                    </p>
+                    <p>
+                        The second failure is invisible failure handling. An agent can loop, choose the wrong tool, use
+                        stale context, produce a plausible but incomplete plan, or stop halfway through a task. If users
+                        cannot understand what happened, support teams cannot review incidents, and engineers cannot
+                        reproduce behavior, the product will lose trust quickly.
+                    </p>
+                    <div class="decision-rule">
+                        <h3>Production decision rule</h3>
+                        <p>
+                            Increase autonomy only after the team can explain permissions, approval boundaries, audit
+                            evidence, fallback behavior, and incident ownership for the current level of autonomy.
+                        </p>
+                    </div>
+                </section>
+
+                <section id="autonomy">
+                    <h2>Bound autonomy before scaling it</h2>
+                    <p>
+                        Bound autonomy means the agent has a specific objective, a small set of allowed actions, and a
+                        clear stop condition. It should know when to ask for approval, when to return a draft, and when
+                        to refuse because the workflow is outside its scope. This is not only risk control. It makes the
+                        product easier to understand. Users can build a mental model of what the agent does and where
+                        human judgment remains responsible.
+                    </p>
+                    <p>
+                        Good boundaries are visible in the interface and the architecture. The user should know whether
+                        the agent is researching, drafting, recommending, or executing. The service should enforce that
+                        distinction in code, not only in prompt text.
+                    </p>
+                </section>
+
+                <section id="tools">
+                    <h2>Tool permissions are architecture, not configuration</h2>
+                    <p>
+                        Tool access is one of the most important architecture decisions in an agentic system. A read-only
+                        search tool, a ticket update tool, an email tool, and a workflow trigger do not carry the same
+                        risk. Permissions should be minimal, purpose-specific, and observable. High-risk tools should be
+                        separated behind approval gates, policy checks, or non-agentic services that validate the
+                        request before execution.
+                    </p>
+                    <p>
+                        Tool schemas also shape behavior. If tools accept vague free text, the agent can hide important
+                        decisions in unstructured input. If tools require explicit fields, the system can validate,
+                        log, review, and test what happened.
+                    </p>
+                </section>
+
+                <section id="approval">
+                    <h2>Human approval is a product design decision</h2>
+                    <p>
+                        Human approval should not be a panic button added at the end. It belongs in the normal workflow.
+                        The interface should show what the agent plans to do, what evidence it used, what will change,
+                        and what the user is approving. Approval is meaningful only when the user can inspect the right
+                        information at the right moment.
+                    </p>
+                    <p>
+                        The leadership implication is that agentic AI needs shared standards. Product, engineering,
+                        risk, and operations teams should agree which actions need approval and what evidence must be
+                        visible before approval is possible.
+                    </p>
+                </section>
+
+                <section id="auditability">
+                    <h2>Auditability must be designed in</h2>
+                    <p>
+                        Auditability is more than logging every token. Useful audit evidence answers practical
+                        questions: what objective did the agent receive, what tools did it call, which data was used,
+                        what did the user approve, what external effects occurred, and which application version was
+                        running? Logs should support incident review without leaking sensitive content into lower-trust
+                        systems.
+                    </p>
+                    <p>
+                        For production operations, audit trails should connect to evaluation. If a failure happens, the
+                        team should be able to add a regression case, adjust a tool boundary, revise approval copy, or
+                        change a policy check. Otherwise audit data becomes passive evidence instead of a learning loop.
+                    </p>
+                </section>
+
+                <section id="avoid">
+                    <h2>Where not to use agents</h2>
+                    <p>
+                        I would avoid agents where the workflow is short, deterministic, high-risk, and already well
+                        served by explicit software. I would also avoid them where users cannot review the result, where
+                        permissions are unclear, or where the organization is not ready to own incident review. In those
+                        cases a simpler tool, rule-based workflow, or human-in-the-loop assistant may be a better first
+                        production step.
+                    </p>
+                    <div class="brand-thesis">
+                        <h3>AI / People / Data / Code breakdown</h3>
+                        <p>
+                            AI plans the next step. People approve sensitive actions. Data boundaries define what the
+                            agent may know. Code enforces tools, permissions, observability, and fallback paths.
+                        </p>
+                    </div>
+                </section>
+
+                <section class="design-review-questions" id="questions">
+                    <h2>Questions I would ask in a design review</h2>
+                    <ul>
+                        <li>What is the agent allowed to do without approval?</li>
+                        <li>Which tools can change data, send messages, or trigger external effects?</li>
+                        <li>How does a user understand why an action was taken?</li>
+                        <li>What is the fallback if the agent fails or loops?</li>
+                        <li>Who owns incident review for agentic failures?</li>
+                    </ul>
+                </section>
+
+                <section class="checklist-block" id="checklist">
+                    <h2>Agentic workflow design checklist</h2>
+                    <ul>
+                        <li>The agent objective is explicit.</li>
+                        <li>Allowed tools are minimal.</li>
+                        <li>High-risk actions require approval.</li>
+                        <li>Every tool call is logged.</li>
+                        <li>Failure modes are documented.</li>
+                        <li>Users can understand what happened.</li>
+                        <li>The system can degrade to a non-agentic path.</li>
+                    </ul>
+                </section>
+
+                <p>
+                    Related field note: <a href="/field-notes/ai-platform-architecture/">AI platform architecture for
+                        enterprise teams</a> explains how shared model gateways, tool patterns, observability, and
+                    developer experience keep agentic work from becoming a set of disconnected experiments.
+                </p>
+            </article>
+        </div>
+
+        <section class="cta-panel" aria-labelledby="article-cta">
+            <h2 id="article-cta">If you are building production AI platforms or hiring for AI engineering leadership in Zurich, I am open to selected conversations.</h2>
+            <div class="cta-actions">
+                <a class="button primary" href="/leadership/">See how I lead engineering teams</a>
+                <a class="button secondary" href="/#contact">Get in touch</a>
+            </div>
+        </section>
+    </main>
+
+    <button id="scroll-to-top" class="scroll-to-top" type="button" aria-label="Scroll to top">
+        <span aria-hidden="true">&#8593;</span>
+    </button>
+    <script src="../../assets/main.js" defer></script>
+</body>
+
+</html>
