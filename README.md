@@ -16,6 +16,7 @@ The site includes a generated `/ai-engineer-zurich-jobs/` page with a static HTM
 ├── scripts/
 │   ├── site-chrome.mjs                # Shared header/navigation renderer
 │   ├── scrape-ai-jobs.mjs             # Serper-based generic job scraper
+│   ├── sync-site-chrome.mjs           # Refreshes managed header blocks
 │   └── build-static.mjs               # Builds deployable static files in dist/
 ├── test/                              # Node test suite
 ├── wrangler.jsonc                     # Cloudflare/Wrangler config
@@ -61,10 +62,9 @@ Build static deploy artifacts:
 npm run build
 ```
 
-This creates `dist/` containing only public static files. During the build,
-hand-authored HTML pages expand `<!-- site-header: {...} -->` markers through
-`scripts/site-chrome.mjs`, so shared header and navigation changes are made in
-one place.
+This creates `dist/` containing only public static files. Hand-authored HTML
+pages keep a rendered header between `<!-- site-header: {...} -->` markers, and
+the build refreshes that managed block through `scripts/site-chrome.mjs`.
 
 ```text
 dist/index.html
@@ -101,6 +101,13 @@ data/ai-engineer-zurich-jobs-table.html   # reusable generated HTML table
 ```
 
 The generated jobs page also uses the shared header/navigation renderer.
+
+After changing shared header/navigation structure, refresh the managed header
+blocks in hand-authored pages:
+
+```bash
+npm run sync:site-chrome
+```
 
 Useful scraper options:
 

@@ -1,7 +1,7 @@
 import assert from 'node:assert/strict';
 import fs from 'node:fs';
 import test from 'node:test';
-import { renderSiteHeader } from '../scripts/site-chrome.mjs';
+import { renderSiteHeader, replaceSiteHeaderRegions } from '../scripts/site-chrome.mjs';
 
 const TEMPLATED_HEADER_PAGES = [
   'index.html',
@@ -36,10 +36,11 @@ test('renderSiteHeader preserves German page navigation labels', () => {
   assert.doesNotMatch(html, /href="\/#profile">Profile<\/a>/);
 });
 
-test('hand-authored pages use shared site header markers', () => {
+test('hand-authored pages use synced shared site header blocks', () => {
   for (const page of TEMPLATED_HEADER_PAGES) {
     const html = fs.readFileSync(page, 'utf8');
-    assert.match(html, /<!-- site-header: \{.*\} -->/, page);
-    assert.doesNotMatch(html, /<header class="site-header"/, page);
+    assert.match(html, /<!-- site-header: \{.*\} -->\s*<header class="site-header"/, page);
+    assert.match(html, /<!-- \/site-header -->/, page);
+    assert.equal(replaceSiteHeaderRegions(html, page), html, page);
   }
 });

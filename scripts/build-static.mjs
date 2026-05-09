@@ -1,6 +1,6 @@
 import fs from 'node:fs/promises';
 import path from 'node:path';
-import { renderSiteHeader } from './site-chrome.mjs';
+import { replaceSiteHeaderRegions } from './site-chrome.mjs';
 
 const dist = 'dist';
 const files = [
@@ -15,21 +15,8 @@ const files = [
   'de',
 ];
 
-const SITE_HEADER_MARKER = /^([ \t]*)<!--\s*site-header:\s*(\{.*\})\s*-->\s*$/gm;
-
-function renderHeaderMarker(rawConfig, { indent, sourcePath }) {
-  try {
-    const config = JSON.parse(rawConfig);
-    return renderSiteHeader({ ...config, indent });
-  } catch (error) {
-    throw new Error(`Invalid site-header marker in ${sourcePath}: ${error.message}`);
-  }
-}
-
 function transformHtml(html, sourcePath) {
-  return html.replace(SITE_HEADER_MARKER, (_match, indent, rawConfig) => {
-    return renderHeaderMarker(rawConfig, { indent, sourcePath });
-  });
+  return replaceSiteHeaderRegions(html, sourcePath);
 }
 
 async function copyEntry(source, target) {

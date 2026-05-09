@@ -13,6 +13,8 @@ const LEADERSHIP_LINKS = [
   { href: '/leadership/#not-optimise-title', label: 'What I Do Not Optimise For' },
 ];
 
+const SITE_HEADER_REGION = /^([ \t]*)<!--\s*site-header:\s*(\{.*\})\s*-->[\s\S]*?([ \t]*)<main\b/gm;
+
 function attrs(values) {
   return values.filter(Boolean).join(' ');
 }
@@ -127,4 +129,26 @@ export function renderSiteHeader({
   ];
 
   return lines.map((line) => `${indent}${line}`).join('\n');
+}
+
+export function renderSiteHeaderBlock(config = {}) {
+  const indent = config.indent ?? '';
+  const headerConfig = { ...config };
+  delete headerConfig.indent;
+
+  return `${[
+    `${indent}<!-- site-header: ${JSON.stringify(headerConfig)} -->`,
+    renderSiteHeader({ ...headerConfig, indent }),
+    `${indent}<!-- /site-header -->`,
+  ].join('\n')}\n`;
+}
+
+export function replaceSiteHeaderRegions(html, sourcePath = 'HTML input') {
+  return html.replace(SITE_HEADER_REGION, (_match, indent, rawConfig, mainIndent) => {
+    try {
+      return `${renderSiteHeaderBlock({ ...JSON.parse(rawConfig), indent })}${mainIndent || indent}<main`;
+    } catch (error) {
+      throw new Error(`Invalid site-header marker in ${sourcePath}: ${error.message}`);
+    }
+  });
 }
