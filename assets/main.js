@@ -58,6 +58,12 @@ const App = (() => {
             }
         });
 
+        window.addEventListener("resize", () => {
+            if (window.innerWidth > 900 && state.siteNav.classList.contains("is-open")) {
+                closeNavigation();
+            }
+        });
+
         const sections = Array.from(state.navLinks)
             .map((link) => {
                 const href = link.getAttribute("href");
