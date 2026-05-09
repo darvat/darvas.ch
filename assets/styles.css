@@ -41,6 +41,22 @@ body.nav-open {
     overflow: hidden;
 }
 
+.nav-overlay {
+    position: fixed;
+    inset: 0;
+    z-index: 99;
+    background: rgba(10, 13, 17, 0.72);
+    backdrop-filter: blur(8px);
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 220ms ease;
+}
+
+body.nav-open .nav-overlay {
+    opacity: 1;
+    pointer-events: auto;
+}
+
 a {
     color: inherit;
 }
@@ -75,7 +91,7 @@ button {
 .site-header {
     position: fixed;
     inset: 0 0 auto 0;
-    z-index: 50;
+    z-index: 100;
     height: var(--header-height);
     display: flex;
     align-items: center;
@@ -145,6 +161,7 @@ button {
 
 .nav-toggle {
     display: none;
+    z-index: 101;
 }
 
 .hero {

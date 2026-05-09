@@ -20,6 +20,7 @@ const App = (() => {
         state.navToggle = document.querySelector(".nav-toggle");
         state.siteNav = document.querySelector(".site-nav");
         state.navLinks = document.querySelectorAll(".site-nav a");
+        state.navOverlay = document.getElementById("nav-overlay");
         state.scrollTopButton = document.getElementById("scroll-to-top");
         state.revealItems = document.querySelectorAll("[data-reveal]");
         state.contactButtons = document.querySelectorAll(".reveal-contact");
@@ -43,6 +44,12 @@ const App = (() => {
                 closeNavigation();
             });
         });
+
+        if (state.navOverlay) {
+            state.navOverlay.addEventListener("click", () => {
+                closeNavigation();
+            });
+        }
 
         document.addEventListener("keydown", (event) => {
             if (event.key === "Escape") {
