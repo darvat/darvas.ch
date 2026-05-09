@@ -20,7 +20,6 @@ const App = (() => {
         state.navToggle = document.querySelector(".nav-toggle");
         state.siteNav = document.querySelector(".site-nav");
         state.navLinks = document.querySelectorAll(".site-nav a");
-        state.navOverlay = document.getElementById("nav-overlay");
         state.scrollTopButton = document.getElementById("scroll-to-top");
         state.revealItems = document.querySelectorAll("[data-reveal]");
         state.contactButtons = document.querySelectorAll(".reveal-contact");
@@ -45,22 +44,10 @@ const App = (() => {
             });
         });
 
-        if (state.navOverlay) {
-            state.navOverlay.addEventListener("click", () => {
-                closeNavigation();
-            });
-        }
-
         document.addEventListener("keydown", (event) => {
             if (event.key === "Escape") {
                 closeNavigation();
                 closeModal();
-            }
-        });
-
-        window.addEventListener("resize", () => {
-            if (window.innerWidth > 900 && state.siteNav.classList.contains("is-open")) {
-                closeNavigation();
             }
         });
 
@@ -163,6 +150,13 @@ const App = (() => {
                 showModal(label, value, button);
             });
         });
+
+        document.addEventListener("click", (event) => {
+            const modal = document.querySelector(".contact-modal");
+            if (modal && event.target === modal) {
+                closeModal();
+            }
+        });
     }
 
     function decodeContactValue(dataKey) {
@@ -216,12 +210,6 @@ const App = (() => {
         document.body.append(modal);
 
         modal.dataset.triggerClass = triggerElement ? "set" : "";
-
-        modal.addEventListener("click", (event) => {
-            if (event.target === modal) {
-                closeModal();
-            }
-        });
 
         setTimeout(() => {
             modalContent.classList.add("show");

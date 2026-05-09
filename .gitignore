@@ -1,4 +1,3 @@
 dist/
 .env
 .wrangler/
-node_modules
