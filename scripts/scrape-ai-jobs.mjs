@@ -407,7 +407,7 @@ export function renderPage(results, { generatedAt = new Date().toISOString() } =
   <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1">
   <meta name="date" content="${escapeAttribute(generatedAt)}">
   <link rel="canonical" href="${JOBS_URL}">
-  <link rel="alternate" href="${JOBS_URL}" hreflang="en-ch">
+  <link rel="alternate" href="${JOBS_URL}" hreflang="en-CH">
   <link rel="alternate" href="${JOBS_URL}" hreflang="x-default">
   <meta property="og:type" content="website">
   <meta property="og:url" content="${JOBS_URL}">
@@ -435,7 +435,7 @@ ${structuredData}
 </head>
 <body>
   <a class="skip-link" href="#jobs">Skip to jobs</a>
-${renderSiteHeader({ indent: '  ' })}
+${renderSiteHeader({ indent: '  ', active: 'ai-jobs' })}
   <main id="jobs" class="jobs-page">
     <nav class="breadcrumbs" aria-label="Breadcrumb">
       <ol>

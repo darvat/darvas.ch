@@ -62,15 +62,20 @@ const App = (() => {
             }
         });
 
+        const hashFromHref = (href) => {
+            const hashIndex = (href || "").indexOf("#");
+            return hashIndex === -1 ? "" : href.slice(hashIndex);
+        };
+
         const sections = Array.from(state.navLinks)
             .map((link) => {
-                const href = link.getAttribute("href");
+                const hash = hashFromHref(link.getAttribute("href"));
 
-                if (!href || !href.startsWith("#") || href.length === 1) {
+                if (hash.length <= 1) {
                     return null;
                 }
 
-                return document.getElementById(href.slice(1));
+                return document.getElementById(hash.slice(1));
             })
             .filter(Boolean);
 
@@ -83,9 +88,9 @@ const App = (() => {
                 return;
             }
 
-            const activeId = `#${visible.target.id}`;
+            const activeHash = `#${visible.target.id}`;
             state.navLinks.forEach((link) => {
-                link.classList.toggle("active", link.getAttribute("href") === activeId);
+                link.classList.toggle("active", hashFromHref(link.getAttribute("href")) === activeHash);
             });
         }, {
             rootMargin: "-34% 0px -56% 0px",
@@ -193,6 +198,8 @@ const App = (() => {
     function showModal(title, content, triggerElement) {
         closeModal();
 
+        state.modalTrigger = triggerElement || null;
+
         const modal = document.createElement("div");
         modal.className = "contact-modal";
         modal.setAttribute("role", "dialog");
@@ -226,11 +233,34 @@ const App = (() => {
         modal.append(modalContent);
         document.body.append(modal);
 
-        modal.dataset.triggerClass = triggerElement ? "set" : "";
-
         modal.addEventListener("click", (event) => {
             if (event.target === modal) {
                 closeModal();
+            }
+        });
+
+        modal.addEventListener("keydown", (event) => {
+            if (event.key !== "Tab") {
+                return;
+            }
+
+            const focusable = modalContent.querySelectorAll(
+                'a[href], button:not([disabled]), input, select, textarea, [tabindex]:not([tabindex="-1"])'
+            );
+
+            if (!focusable.length) {
+                return;
+            }
+
+            const first = focusable[0];
+            const last = focusable[focusable.length - 1];
+
+            if (event.shiftKey && document.activeElement === first) {
+                event.preventDefault();
+                last.focus();
+            } else if (!event.shiftKey && document.activeElement === last) {
+                event.preventDefault();
+                first.focus();
             }
         });
 
@@ -252,6 +282,12 @@ const App = (() => {
         setTimeout(() => {
             modal.remove();
         }, 180);
+
+        const trigger = state.modalTrigger;
+        state.modalTrigger = null;
+        if (trigger && typeof trigger.focus === "function") {
+            trigger.focus();
+        }
     }
 
     return { init };

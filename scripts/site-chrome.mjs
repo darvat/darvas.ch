@@ -81,6 +81,13 @@ function renderNavLinks({ variant, active, depth }) {
     depth,
   }));
   lines.push(renderTopLink({
+    key: 'ai-jobs',
+    href: '/ai-engineer-zurich-jobs/',
+    label: 'AI Jobs',
+    active,
+    depth,
+  }));
+  lines.push(renderTopLink({
     key: 'contact',
     href: '/#contact',
     label: variant === 'de' ? 'Kontakt' : 'Contact',

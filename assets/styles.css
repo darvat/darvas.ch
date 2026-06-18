@@ -966,13 +966,13 @@ main>section {
     word-break: break-word;
 }
 
-[data-reveal] {
+html.js [data-reveal] {
     opacity: 0;
     transform: translateY(28px);
     transition: opacity 620ms ease, transform 620ms ease;
 }
 
-[data-reveal].is-visible {
+html.js [data-reveal].is-visible {
     opacity: 1;
     transform: translateY(0);
 }
@@ -2064,22 +2064,23 @@ a.article-card:focus-visible::after {
     }
 
     .hero-proof {
-        grid-template-columns: repeat(3, minmax(0, 1fr));
+        grid-template-columns: 1fr;
         margin-top: 10px;
     }
 
     .hero-proof div {
-        padding: 12px 10px;
+        padding: 14px 16px;
     }
 
     .hero-proof dt {
-        font-size: 1.7rem;
+        font-size: 1.6rem;
     }
 
     .hero-proof dd {
         margin-top: 6px;
-        font-size: 0.68rem;
-        line-height: 1.28;
+        max-width: none;
+        font-size: 0.82rem;
+        line-height: 1.3;
     }
 
     .jobs-section,
@@ -2251,7 +2252,7 @@ a.article-card:focus-visible::after {
         line-height: 1.1;
     }
 
-    [data-reveal] {
+    html.js [data-reveal] {
         opacity: 1;
         transform: none;
     }
