@@ -8,18 +8,12 @@ const files = [
   'robots.txt',
   'sitemap.xml',
   'assets',
+  'desmo',
   'ai-engineer-zurich-jobs',
   'field-notes',
   'leadership',
   'zurich-ai-market',
   'de',
-];
-
-const routedFiles = [
-  {
-    source: 'docs/improvement/desmo-engine-lab.html',
-    target: 'desmo/index.html',
-  },
 ];
 
 function transformHtml(html, sourcePath) {
@@ -62,13 +56,6 @@ async function build() {
       }
       const target = path.join(dist, file);
       await copyEntry(file, target);
-    })
-  );
-
-  await Promise.all(
-    routedFiles.map(async ({ source, target }) => {
-      await fs.access(source);
-      await copyEntry(source, path.join(dist, target));
     })
   );
 
