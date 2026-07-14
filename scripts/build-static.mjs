@@ -15,6 +15,13 @@ const files = [
   'de',
 ];
 
+const routedFiles = [
+  {
+    source: 'docs/improvement/desmo-engine-lab.html',
+    target: 'desmo/index.html',
+  },
+];
+
 function transformHtml(html, sourcePath) {
   return replaceSiteHeaderRegions(html, sourcePath);
 }
@@ -55,6 +62,13 @@ async function build() {
       }
       const target = path.join(dist, file);
       await copyEntry(file, target);
+    })
+  );
+
+  await Promise.all(
+    routedFiles.map(async ({ source, target }) => {
+      await fs.access(source);
+      await copyEntry(source, path.join(dist, target));
     })
   );
 
