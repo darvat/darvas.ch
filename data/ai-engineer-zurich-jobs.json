@@ -1,6 +1,6 @@
 {
-  "generatedAt": "2026-08-18T19:01:38.987Z",
-  "count": 43,
+  "generatedAt": "2026-08-19T18:57:06.990Z",
+  "count": 45,
   "results": [
     {
       "title": "124 Ai engineer jobs in Zürich",
@@ -18,7 +18,7 @@
     {
       "title": "1.000+ Artificial Intelligence Jobs in Zürich, Zürich, Schweiz",
       "link": "https://ch.linkedin.com/jobs/artificial-intelligence-stellen-z%C3%BCrich",
-      "snippet": "2.000+ Artificial Intelligence Jobs in Zürich, Zürich, Schweiz · Voice Narrator - Fully Remote | Upto $150/hr · AI Engineer · AI Engineer · Computer Vision Engineer ...",
+      "snippet": "1.000+ Artificial Intelligence Jobs in Zürich, Zürich, Schweiz · Voice Narrator - Fully Remote | Upto $150/hr · AI Engineer · Computer Vision Engineer, Applied ML.",
       "source": "ch.linkedin.com",
       "queries": [
         "AI Engineer Zurich jobs",
@@ -26,6 +26,31 @@
         "Generative AI Engineer Zurich jobs",
         "AI Software Engineer Zurich jobs",
         "Data Scientist AI Zurich jobs"
+      ]
+    },
+    {
+      "title": "Artificial Intelligence Jobs in Zürich, ZH",
+      "link": "https://ch.indeed.com/q-artificial-intelligence-l-z%C3%BCrich,-zh-jobs.html",
+      "snippet": "Artificial intelligence Jobs in Zürich, ZH ; AI Engineer (Hybrid; m/f/x/d; 80-100%), Zurich (Zurich, CH). Swiss Re ; Software Engineering Internship - AI Platform.",
+      "source": "ch.indeed.com",
+      "queries": [
+        "AI Engineer Zurich jobs",
+        "Artificial Intelligence Engineer Zurich jobs",
+        "Generative AI Engineer Zurich jobs",
+        "AI Software Engineer Zurich jobs"
+      ]
+    },
+    {
+      "title": "248 machine learning Jobs in Zürich, August 2026",
+      "link": "https://glassdoor.com/Job/z%C3%BCrich-machine-learning-jobs-SRCH_IL.0,6_IC3297851_KO7,23.htm",
+      "snippet": "AI Engineer (Hybrid; m/f/x/d; 80-100%), Zurich (Zurich, CH). Zürich. CHF 106K - CHF 158K (Employer provided). Build end-to-end AI pipelines from data ingestion ...",
+      "source": "glassdoor.com",
+      "queries": [
+        "AI Engineer Zurich jobs",
+        "Artificial Intelligence Engineer Zurich jobs",
+        "Machine Learning Engineer Zurich jobs",
+        "ML Engineer Zurich jobs",
+        "Generative AI Engineer Zurich jobs"
       ]
     },
     {
@@ -51,7 +76,7 @@
       ]
     },
     {
-      "title": "592 Jobs für Artificial Intelligence Engineer in Schweiz",
+      "title": "997 Jobs für Artificial Intelligence Engineer in Schweiz",
       "link": "https://ch.linkedin.com/jobs/artificial-intelligence-engineer-stellen",
       "snippet": "592 Artificial Intelligence Engineer Jobs in Schweiz · AI/ML Engineer · AI Engineer (80%-100%) - Zurich · AI Engineer · Machine Learning Engineer 100% (f/m/d) · AI ...",
       "source": "ch.linkedin.com",
@@ -104,22 +129,12 @@
       "source": "swissdevjobs.ch",
       "queries": [
         "AI Engineer Zurich jobs",
-        "Machine Learning Engineer Zurich jobs",
-        "ML Engineer Zurich jobs",
+        "Artificial Intelligence Engineer Zurich jobs",
         "Generative AI Engineer Zurich jobs",
         "LLM Engineer Zurich jobs",
+        "Data Scientist AI Zurich jobs",
         "MLOps Engineer Zurich jobs",
         "NLP Engineer Zurich jobs"
-      ]
-    },
-    {
-      "title": "394 artificial intelligence Jobs in Switzerland, August 2026",
-      "link": "https://glassdoor.com/Job/switzerland-artificial-intelligence-jobs-SRCH_IL.0,11_IN226_KO12,35.htm",
-      "snippet": "394 open jobs for Artificial intelligence in Switzerland. AI Engineer | Zurich | Switzerland Zürich Strong proficiency in Python for production-level software ...",
-      "source": "glassdoor.com",
-      "queries": [
-        "AI Engineer Zurich jobs",
-        "Generative AI Engineer Zurich jobs"
       ]
     },
     {
@@ -133,37 +148,9 @@
       ]
     },
     {
-      "title": "12 Machine learning engineer jobs in Zürich",
-      "link": "https://jobup.ch/en/jobs/?location=z%C3%BCrich&term=machine+learning+engineer",
-      "snippet": "Find the Machine learning engineer job that suits you, Zürich, on jobup.ch! Click on the ad now and apply online today!",
-      "source": "jobup.ch",
-      "queries": [
-        "Machine Learning Engineer Zurich jobs",
-        "ML Engineer Zurich jobs"
-      ]
-    },
-    {
-      "title": "Machine Learning Engineer Jobs in Zürich, ZH",
-      "link": "https://ch.indeed.com/q-machine-learning-engineer-l-z%C3%BCrich,-zh-jobs.html",
-      "snippet": "167 Job als Machine Learning Engineer in Zürich, ZH auf Indeed.com verfügbar. Machine Learning Engineer, Robotics Engineer, Computer Vision Engineer und ...",
-      "source": "ch.indeed.com",
-      "queries": [
-        "ML Engineer Zurich jobs"
-      ]
-    },
-    {
-      "title": "Generative Ai Engineer Jobs | Jetzt 300 offene Stellen finden",
-      "link": "https://ch.indeed.com/q-generative-ai-engineer-jobs.html",
-      "snippet": "Generative ai engineer Jobs · AI Research Engineer. Normal Computing Corporation. Zürich, ZH · Founding AI Engineer. Ahead Health AG. Zürich, ZH · AI Engineer.",
-      "source": "ch.indeed.com",
-      "queries": [
-        "Generative AI Engineer Zurich jobs"
-      ]
-    },
-    {
       "title": "Data Scientist Jobs in Zürich, ZH",
       "link": "https://ch.indeed.com/q-data-scientist-l-z%C3%BCrich,-zh-jobs.html",
-      "snippet": "125 Job als Data Scientist in Zürich, ZH auf Indeed.com verfügbar. Data Scientist, Research Scientist, Machine Learning Engineer und mehr!",
+      "snippet": "104 Job als Data Scientist in Zürich, ZH auf Indeed.com verfügbar. Data Scientist, Research Scientist, Machine Learning Engineer und mehr!",
       "source": "ch.indeed.com",
       "queries": [
         "Data Scientist AI Zurich jobs"
@@ -179,6 +166,16 @@
       ]
     },
     {
+      "title": "Emplois Machine learning engineer (Zürich, ZH)",
+      "link": "https://ch-fr.indeed.com/q-machine-learning-engineer-l-z%C3%BCrich,-zh-emplois.html",
+      "snippet": "Machine Learning Engineer 100% (f/m/d) ... Strong programming skills in Python with experience in machine learning libraries and deep learning frameworks such as ...",
+      "source": "ch-fr.indeed.com",
+      "queries": [
+        "Machine Learning Engineer Zurich jobs",
+        "ML Engineer Zurich jobs"
+      ]
+    },
+    {
       "title": "Llm jobs in Switzerland (36)",
       "link": "https://efinancialcareers.ie/jobs/llm/in-switzerland",
       "snippet": "Llm jobs in Switzerland (36). Machine Learning Engineer 100% (f/m/d). Julius Baer. Zürich, SwitzerlandPermanent. Competitive. 14 hours ago. Apply now. Save.",
@@ -188,31 +185,20 @@
       ]
     },
     {
-      "title": "Artificial Intelligence Jobs in Zürich, ZH",
-      "link": "https://ch.indeed.com/q-artificial-intelligence-l-z%C3%BCrich,-zh-jobs.html",
-      "snippet": "228 Job als Artificial Intelligence in Zürich, ZH auf Indeed.com verfügbar. Staff Software Engineer, IT Support Specialist, Ai Developer und mehr!",
-      "source": "ch.indeed.com",
-      "queries": [
-        "AI Engineer Zurich jobs",
-        "Artificial Intelligence Engineer Zurich jobs",
-        "AI Software Engineer Zurich jobs"
-      ]
-    },
-    {
-      "title": "819 Machine Learning Jobs in Zürich, Zürich, Schweiz",
-      "link": "https://ch.linkedin.com/jobs/machine-learning-stellen-z%C3%BCrich",
-      "snippet": "819 Machine Learning Jobs in Zürich, Zürich, Schweiz · Machine Learning - Internship · Computer Vision Engineer, Applied ML · Internship - Data / ML / AI · Applied ...",
-      "source": "ch.linkedin.com",
+      "title": "15 Machine-Learning Entwickler Stellenangebote in Zürich",
+      "link": "https://swissdevjobs.ch/de/jobs/Machine-Learning/Zurich",
+      "snippet": "Suchen Sie Machine Learning & KI Stellenangebote in Zürich? Hier finden Sie transparente Stellen mit Gehalt-Info und Tech-Stacks (bis zum 165'000 CHF pro ...",
+      "source": "swissdevjobs.ch",
       "queries": [
         "Machine Learning Engineer Zurich jobs",
         "ML Engineer Zurich jobs",
-        "MLOps Engineer Zurich jobs"
+        "AI Software Engineer Zurich jobs"
       ]
     },
     {
       "title": "Generative Ai Jobs in Zürich, ZH",
       "link": "https://ch.indeed.com/q-generative-ai-l-z%C3%BCrich,-zh-jobs.html",
-      "snippet": "94 Job als Generative Ai in Zürich, ZH auf Indeed.com verfügbar. Security Engineer, Prompt Engineer, Ai Developer und mehr!",
+      "snippet": "90 Job als Generative Ai in Zürich, ZH auf Indeed.com verfügbar. Security Engineer, Prompt Engineer, Ai Developer und mehr!",
       "source": "ch.indeed.com",
       "queries": [
         "AI Engineer Zurich jobs",
@@ -220,22 +206,32 @@
       ]
     },
     {
-      "title": "155 Jobs für Natural Language Processing in Schweiz",
-      "link": "https://ch.linkedin.com/jobs/natural-language-processing-stellen",
-      "snippet": "155 Natural Language Processing Jobs in Schweiz · AI Engineer NLP (Python & Go – Bridging ML and Platform) · Machine Learning Training · Data Scientist (100%).",
+      "title": "839 Machine Learning Jobs in Zürich, Zürich, Schweiz",
+      "link": "https://ch.linkedin.com/jobs/machine-learning-stellen-z%C3%BCrich",
+      "snippet": "839 Machine Learning Jobs in Zürich, Zürich, Schweiz ML Research Engineer / Scientist. Computer Vision Engineer, Applied ML Computer Vision Engineer, AI ...",
       "source": "ch.linkedin.com",
-      "queries": [
-        "NLP Engineer Zurich jobs"
-      ]
-    },
-    {
-      "title": "240 machine learning Jobs in Zürich, August 2026",
-      "link": "https://glassdoor.com/Job/z%C3%BCrich-machine-learning-jobs-SRCH_IL.0,6_IC3297851_KO7,23.htm",
-      "snippet": "Search Machine learning jobs in Zürich with company ratings & salaries. 240 open jobs for Machine learning in Zürich.",
-      "source": "glassdoor.com",
       "queries": [
         "Machine Learning Engineer Zurich jobs",
         "ML Engineer Zurich jobs"
+      ]
+    },
+    {
+      "title": "Machine Learning jobs",
+      "link": "https://datacareer.ch/categories/machinelearning",
+      "snippet": "Machine learning engineers and researchers design models, train them on large datasets, is full-time based in Zurich.",
+      "source": "datacareer.ch",
+      "queries": [
+        "Machine Learning Engineer Zurich jobs",
+        "ML Engineer Zurich jobs"
+      ]
+    },
+    {
+      "title": "154 Jobs für Natural Language Processing in Schweiz",
+      "link": "https://ch.linkedin.com/jobs/natural-language-processing-stellen",
+      "snippet": "154 Natural Language Processing Jobs in Schweiz · AI Engineer NLP (Python & Go – Bridging ML and Platform) · Data Scientist (100%) · Data Scientist (100%) · AI ...",
+      "source": "ch.linkedin.com",
+      "queries": [
+        "NLP Engineer Zurich jobs"
       ]
     },
     {
@@ -248,18 +244,27 @@
       ]
     },
     {
-      "title": "15 Machine-Learning Entwickler Stellenangebote in Zürich",
-      "link": "https://swissdevjobs.ch/de/jobs/Machine-Learning/Zurich",
-      "snippet": "Suchen Sie Machine Learning & KI Stellenangebote in Zürich? Hier finden Sie transparente Stellen mit Gehalt-Info und Tech-Stacks (bis zum 165'000 CHF pro ...",
-      "source": "swissdevjobs.ch",
+      "title": "799 Software Engineer jobs in Winterthur",
+      "link": "https://linkedin.com/jobs/software-engineer-jobs-winterthur?trk=guest_job_search_related_jserp_link",
+      "snippet": "Software Engineer – DevOps. RIVR. Zurich, Zurich, Switzerland 2 months ago. AI-Native Software Engineer (m/w/d). AI-Native Software Engineer (m/w/d). INACTA.",
+      "source": "linkedin.com",
       "queries": [
         "AI Software Engineer Zurich jobs"
       ]
     },
     {
-      "title": "49 Data scientist jobs in Zürich",
+      "title": "als 1.000 Jobs für Data Science in Zürich, Zürich, Schweiz",
+      "link": "https://ch.linkedin.com/jobs/data-science-stellen-z%C3%BCrich",
+      "snippet": "1.000+ Data Science Jobs in Zürich, Zürich, Schweiz · Intern – Python Development & Data Analysis · Internship - Data / ML / AI · Machine Learning - Internship.",
+      "source": "ch.linkedin.com",
+      "queries": [
+        "Data Scientist AI Zurich jobs"
+      ]
+    },
+    {
+      "title": "55 Data scientist jobs in Zürich",
       "link": "https://jobs.ch/en/vacancies/?location=z%C3%BCrich&term=data+scientist",
-      "snippet": "49 Data scientist jobs in Zürich ; 2 weeks ago. Senior Data Engineer · Kanadevia Inova AG ; 2 days ago. Data Scientist Sensors · RUAG MRO Holding AG ; 2 days ago.",
+      "snippet": "Apply now for Data scientist jobs in Zürich! 4 to 20 hours per week. Salary: CHF 25 /hour mimic robotics. Artificial Intelligence & Data – AI Strategy",
       "source": "jobs.ch",
       "queries": [
         "Data Scientist AI Zurich jobs"
@@ -268,7 +273,7 @@
     {
       "title": "Data scientist and data analyst jobs – all vacancies in ...",
       "link": "https://data-jobs.ch/data-scientist",
-      "snippet": "discover all vacancies in Switzerland! Agentic AI Data Scientist/Engineer. AI by McKinsey Geneva, Zurich McKinsey & Company Inc. Lead Data Analytics ...",
+      "snippet": "discover all vacancies in Switzerland! Data Scientist - QuantumBlack, AI by McKinsey Geneva, Zurich McKinsey & Company Inc. Lead Data Analytics Consultant ( ...",
       "source": "data-jobs.ch",
       "queries": [
         "Data Scientist AI Zurich jobs"
@@ -293,6 +298,15 @@
       ]
     },
     {
+      "title": "AI Platform Engineer / MLOps - Zurich",
+      "link": "https://ch.linkedin.com/jobs/view/ai-platform-engineer-mlops-zurich-at-tms-technology-4382989852",
+      "snippet": "AI Platform Engineer / MLOps. Location: Zurich. Employment: Permanent Full-Time. Building the production layer behind real world AI systems.",
+      "source": "ch.linkedin.com",
+      "queries": [
+        "MLOps Engineer Zurich jobs"
+      ]
+    },
+    {
       "title": "16 Jobs als Nlp, Stellenangebote in Kanton Zürich",
       "link": "https://ch.indeed.com/q-nlp-l-kanton-z%C3%BCrich-jobs.html",
       "snippet": "16 Job als Nlp in Kanton Zürich auf Indeed.com verfügbar. Prompt Engineer, Research Scientist, Deployment Strategist und mehr!",
@@ -302,14 +316,12 @@
       ]
     },
     {
-      "title": "Artificial Intelligence Jobs",
-      "link": "https://datacareer.ch/categories/AI",
-      "snippet": "Find AI Jobs in Switzerland. Datacareer offers you 300+ jobs in the field of Big Data.",
-      "source": "datacareer.ch",
+      "title": "Search Jobs - Zurich - Jobs - Careers at Apple",
+      "link": "https://jobs.apple.com/en-us/search?location=zurich-ZUR",
+      "snippet": "Explore all Zurich jobs at Apple. Create a profile and apply today. AIML Researcher - Foundation Model, Post-Training Machine Learning and AIAug. Research ...",
+      "source": "jobs.apple.com",
       "queries": [
-        "AI Engineer Zurich jobs",
-        "Artificial Intelligence Engineer Zurich jobs",
-        "Generative AI Engineer Zurich jobs"
+        "LLM Engineer Zurich jobs"
       ]
     },
     {
@@ -351,8 +363,17 @@
     {
       "title": "MLOps Engineer Jobs in Zurich | 5 Positions",
       "link": "https://devopsprojectshq.com/role/mlops-engineer-jobs-zurich",
-      "snippet": "Find 5 MLOps Engineer jobs in Zurich. CHF90K-160K salary. Ops Engineers build and maintain the infrastructure for deploying, monitoring, and scaling machine ...",
+      "snippet": "Find 5 MLOps Engineer jobs in Zurich. CHF90K-160K salary. Remote & on-site opportunities.",
       "source": "devopsprojectshq.com",
+      "queries": [
+        "MLOps Engineer Zurich jobs"
+      ]
+    },
+    {
+      "title": "MLOps jobs in Kanton Zürich on",
+      "link": "https://jobs.startup-insider.com/jobs/locations/kanton-zuerich/skills/mlops",
+      "snippet": "10 MLOps jobs in Kanton Zürich ; Senior Software Engineer – MLOps · MLOps · Softwareentwicklung · Git ; MLOps Engineer - Fully Remote | Upto $110/hr · JAX-Experte.",
+      "source": "jobs.startup-insider.com",
       "queries": [
         "MLOps Engineer Zurich jobs"
       ]
@@ -376,10 +397,20 @@
       ]
     },
     {
-      "title": "Machine Learning jobs",
-      "link": "https://datacareer.ch/categories/machinelearning",
-      "snippet": "Find Machine Learning Jobs in Switzerland. Datacareer offers you 300+ jobs in the field of Big Data.",
+      "title": "Artificial Intelligence Jobs",
+      "link": "https://datacareer.ch/categories/AI",
+      "snippet": "Find AI Jobs in Switzerland. Datacareer offers you 300+ jobs in the field of Big Data.",
       "source": "datacareer.ch",
+      "queries": [
+        "AI Engineer Zurich jobs",
+        "Generative AI Engineer Zurich jobs"
+      ]
+    },
+    {
+      "title": "28 Machine-Learning Developer jobs in Switzerland",
+      "link": "https://swissdevjobs.ch/jobs/Machine-Learning/all",
+      "snippet": "Looking for Machine Learning & AI jobs in Switzerland? We are the only transparent job board where you find tech-stacks and salaries (up to 165'000 CHF per ...",
+      "source": "swissdevjobs.ch",
       "queries": [
         "Machine Learning Engineer Zurich jobs",
         "ML Engineer Zurich jobs"
@@ -395,19 +426,10 @@
       ]
     },
     {
-      "title": "29 Machine-Learning Developer jobs in Switzerland",
-      "link": "https://swissdevjobs.ch/jobs/Machine-Learning/all",
-      "snippet": "Looking for Machine Learning & AI jobs in Switzerland? We are the only transparent job board where you find tech-stacks and salaries (up to 165'000 CHF per ...",
-      "source": "swissdevjobs.ch",
-      "queries": [
-        "Artificial Intelligence Engineer Zurich jobs"
-      ]
-    },
-    {
-      "title": "SwissAIJob — Every AI Job in Switzerland",
-      "link": "https://swissaijob.ch",
-      "snippet": "Every active AI and ML job in Switzerland — academia and industry, scraped from employer sites, updated every 3 days. Direct apply links.",
-      "source": "swissaijob.ch",
+      "title": "Generative Ai jobs in Switzerland (105)",
+      "link": "https://efinancialcareers.co.za/jobs/generative-ai/in-switzerland",
+      "snippet": "Click here to view 105 Generative Ai jobs in Switzerland, brought to you by eFinancialCareers.",
+      "source": "efinancialcareers.co.za",
       "queries": [
         "Generative AI Engineer Zurich jobs"
       ]
